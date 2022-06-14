@@ -342,14 +342,19 @@ public class APIUtil {
 		}
 	}
 	
-	public static void updateEJCZDDXX() {
-		/*
-		checkEJSBHWGSState();
-		checkEJSBHXBHWGSState();
-		erJianChengZhongZhong();
-		checkEJXBHWGSState();
-		checkIfEJXBYwc();
-		*/
+	public static JSONObject updateCheLiangWcddcsByCph(String cph) {
+		JSONObject resultJO = null;
+		try {
+			Map parames = new HashMap<String, String>();
+	        parames.put("cph", cph);
+	        resultJO = doHttp("updateCheLiangWcddcsByCph",parames);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			return resultJO;
+		}
 	}
 	
 	public static void playWeight(float djczl, int jyFlag) {
@@ -371,32 +376,6 @@ public class APIUtil {
 	}
 	
 	public static void main(String[] args) {
-		//Car car1=new Car();
-		//car1.setsLicense(" ³B9023");
-		//APIUtil.updateYJCPSBDDXX(car1);
 		
-		//APIUtil.updateYJCZDDXX();
-
-		//Car car2=new Car();
-		//car2.setsLicense(" ³B9023");
-		//APIUtil.updateEJCPSBDDXX(car2);
-		
-		//APIUtil.updateEJCZDDXX();
-		
-		//APIUtil.checkDingDanIfExistByZt(DingDanZhuangTai.YI_JIAN_SHANG_BANG_TEXT,DingDan.DAI_SHANG_BANG,DingDan.DAI_SHANG_BANG);
-		
-		
-		//printGbjl(GuoBangJiLu.RU_CHANG_GUO_BANG);
-		
-		/*
-		DingDan dd=new DingDan();
-    	dd.setId(83);
-    	dd.setDdztMc(DingDanZhuangTai.ER_JIAN_SHANG_BANG_TEXT);
-    	dd.setEjzt(DingDan.DAI_SHANG_BANG);
-    	dd.setEjbfh(2);
-    	APIUtil.editDingDan(dd);
-    	*/
-		
-		//JSONObject resultJO=APIUtil.getDingDan("9005",DingDanZhuangTai.ER_JIAN_PAI_DUI_ZHONG_TEXT);
 	}
 }
