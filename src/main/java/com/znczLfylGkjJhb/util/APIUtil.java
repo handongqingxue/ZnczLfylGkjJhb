@@ -19,8 +19,8 @@ import com.znczLfylGkjJhb.yz.*;
 
 public class APIUtil {
 	
-	public static final String SERVICE_URL="http://10.10.99.20:8080/ZnczLfylJhb/gkj/";
-	//public static final String SERVICE_URL="http://localhost:8080/ZnczLfylJhb/gkj/";
+	//public static final String SERVICE_URL="http://10.10.99.20:8080/ZnczLfylJhb/gkj/";
+	public static final String SERVICE_URL="http://localhost:8080/ZnczLfylJhb/gkj/";
 	public static final int YI_HAO_BANG_FANG=1;
 	public static final int ER_HAO_BANG_FANG=2;
 
@@ -68,6 +68,22 @@ public class APIUtil {
 		System.out.println("result==="+result);
 		JSONObject resultJO = new JSONObject(result);
 		return resultJO;
+	}
+
+	public static JSONObject addDingDan(String cph) {
+		// TODO Auto-generated method stub
+		JSONObject resultJO = null;
+		try {
+			Map parames = new HashMap<String, String>();
+	        parames.put("cph", cph);  
+	        resultJO = doHttp("addDingDan",parames);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			return resultJO;
+		}
 	}
 
 	public static JSONObject getDingDan(String cph, String ddztMc) {
@@ -333,6 +349,23 @@ public class APIUtil {
 	        parames.put("ddId", ddId);
 	        parames.put("gblx", gblx);
 	        resultJO = doHttp("selectGuoBangJiLuByDdId",parames);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			return resultJO;
+		}
+	}
+
+	public static JSONObject getCphByBfhDdzt(Integer bfh, String ddztMc) {
+		// TODO Auto-generated method stub
+		JSONObject resultJO = null;
+		try {
+			Map parames = new HashMap<String, String>();
+	        parames.put("bfh", bfh);  
+	        parames.put("ddztMc", ddztMc);
+	        resultJO = doHttp("getCphByBfhDdzt",parames);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

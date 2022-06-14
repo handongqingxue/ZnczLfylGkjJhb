@@ -176,9 +176,6 @@ public class FMSGCallBack implements HCNetSDK.FMSGCallBack
             	int bfh = LoadProperties.getBangFangHao();
             	String ip = car.getIp().trim();
             	if(LoadProperties.getHikvisionYiJianIP().equals(ip)) {
-            		//一检车辆识别摄像头
-            		//APIUtil.updateYJCPSBDDXX(car);
-            		
             		JSONObject resultJO=null;
             		resultJO=APIUtil.getDingDan(car.getsLicense(),DingDanZhuangTai.YI_JIAN_PAI_DUI_ZHONG_TEXT);
             		if(resultJO!=null) {
