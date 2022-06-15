@@ -2,9 +2,6 @@ package com.znczLfylGkjJhb.entity;
 
 public class GuoBangJiLu {
 
-	public static final Integer ZHENG_CHANG=1;
-	public static final Integer YI_CHANG=2;
-	
 	public static final int RU_CHANG_GUO_BANG=1;
 	public static final int CHU_CHANG_GUO_BANG=2;
 	
@@ -20,30 +17,6 @@ public class GuoBangJiLu {
 	}
 	public void setGbzl(Float gbzl) {
 		this.gbzl = gbzl;
-	}
-	public String getZp1() {
-		return zp1;
-	}
-	public void setZp1(String zp1) {
-		this.zp1 = zp1;
-	}
-	public String getZp2() {
-		return zp2;
-	}
-	public void setZp2(String zp2) {
-		this.zp2 = zp2;
-	}
-	public String getZp3() {
-		return zp3;
-	}
-	public void setZp3(String zp3) {
-		this.zp3 = zp3;
-	}
-	public Integer getGbzt() {
-		return gbzt;
-	}
-	public void setGbzt(Integer gbzt) {
-		this.gbzt = gbzt;
 	}
 	public String getGbsj() {
 		return gbsj;
@@ -81,18 +54,6 @@ public class GuoBangJiLu {
 	public void setCph(String cph) {
 		this.cph = cph;
 	}
-	public String getSjsfzh() {
-		return sjsfzh;
-	}
-	public void setSjsfzh(String sjsfzh) {
-		this.sjsfzh = sjsfzh;
-	}
-	public String getSjxm() {
-		return sjxm;
-	}
-	public void setSjxm(String sjxm) {
-		this.sjxm = sjxm;
-	}
 	public Integer getLxlx() {
 		return lxlx;
 	}
@@ -118,18 +79,12 @@ public class GuoBangJiLu {
 		this.shbmMc = shbmMc;
 	}
 	private Float gbzl;
-	private String zp1;
-	private String zp2;
-	private String zp3;
-	private Integer gbzt;
 	private String gbsj;
 	private Integer gblx;
 	private String gblxName;
 	private Integer ddId;
 	private String ddh;
 	private String cph;
-	private String sjsfzh;
-	private String sjxm;
 	private Integer lxlx;//流向类型
 	private String yssMc;
 	private String fhdwMc;

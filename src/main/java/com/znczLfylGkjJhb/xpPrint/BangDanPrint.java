@@ -74,14 +74,6 @@ public class BangDanPrint implements Printable {
 			g2.drawString("车牌号:"+gbjl.getCph(), (float)x+20,(float)y+line);
 			line+=heigth+2;
 
-			//设置司机姓名  
-			g2.drawString("司机姓名:"+gbjl.getSjxm(), (float)x+20,(float)y+line);
-			line+=heigth+2;
-
-			//设置司机身份证号  
-			g2.drawString("司机身份证号:"+gbjl.getSjsfzh(), (float)x+20,(float)y+line);
-			line+=heigth+2;
-
 			//设置过磅重量  
 			g2.drawString("过磅重量:"+gbjl.getGbzl() , (float)x+20,(float)y+line);
 			line+=heigth+2;

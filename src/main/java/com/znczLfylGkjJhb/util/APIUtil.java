@@ -151,10 +151,6 @@ public class APIUtil {
 	        parames.put("xddztMc", dd.getXddztMc());
 	        parames.put("xyjzt", dd.getXyjzt());
 	        parames.put("xejzt", dd.getXejzt());
-	        if(dd.getSjzl()!=null)
-	        	parames.put("sjzl", dd.getSjzl());
-	        if(dd.getZlceb()!=null)
-	        	parames.put("zlceb", dd.getZlceb());
 	        resultJO = doHttp("editDingDanByZt",parames);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -165,16 +161,12 @@ public class APIUtil {
 		}
 	}
 	
-	public static JSONObject newBangDanJiLu(Float mz, Float pz, Float jz, Integer ddId) {
+	public static JSONObject newBangDanJiLu(Float yjzl, Integer ddId) {
 		JSONObject resultJO = null;
 		try {
 			Map parames = new HashMap<String, String>();
-	        if(mz!=null)
-	        	parames.put("mz", mz);
-	        if(pz!=null)
-	        	parames.put("pz", pz);
-	        if(jz!=null)
-	        	parames.put("jz", jz);
+	        if(yjzl!=null)
+	        	parames.put("yjzl", yjzl);
 	        if(ddId!=null)
 	        	parames.put("ddId", ddId);  
 	        resultJO = doHttp("newBangDanJiLu",parames);
@@ -228,10 +220,6 @@ public class APIUtil {
 		try {
 			Map parames = new HashMap<String, String>();
 	        parames.put("gbzl", gbjl.getGbzl());
-	        parames.put("zp1", gbjl.getZp1());
-	        parames.put("zp2", gbjl.getZp2());
-	        parames.put("zp3", gbjl.getZp3());
-	        parames.put("gbzt", gbjl.getGbzt());
 	        parames.put("gblx", gbjl.getGblx());
 	        parames.put("ddId", gbjl.getDdId());
 	        resultJO = doHttp("newGuoBangJiLu",parames);

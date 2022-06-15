@@ -95,18 +95,6 @@ public class DingDan {
 	public void setXejzt(Integer xejzt) {
 		this.xejzt = xejzt;
 	}
-	public String getSjsfzh() {
-		return sjsfzh;
-	}
-	public void setSjsfzh(String sjsfzh) {
-		this.sjsfzh = sjsfzh;
-	}
-	public String getSjxm() {
-		return sjxm;
-	}
-	public void setSjxm(String sjxm) {
-		this.sjxm = sjxm;
-	}
 	public String getCph() {
 		return cph;
 	}
@@ -130,24 +118,6 @@ public class DingDan {
 	}
 	public void setLxlx(Integer lxlx) {
 		this.lxlx = lxlx;
-	}
-	public Float getYzxzl() {
-		return yzxzl;
-	}
-	public void setYzxzl(Float yzxzl) {
-		this.yzxzl = yzxzl;
-	}
-	public Float getSjzl() {
-		return sjzl;
-	}
-	public void setSjzl(Float sjzl) {
-		this.sjzl = sjzl;
-	}
-	public Float getZlceb() {
-		return zlceb;
-	}
-	public void setZlceb(Float zlceb) {
-		this.zlceb = zlceb;
 	}
 	public Float getDj() {
 		return dj;
@@ -236,15 +206,10 @@ public class DingDan {
 	private Integer xyjzt=0;//新一检状态(1.待上磅 2.上磅中 3.已完成)
 	private Integer ejzt=0;//二检状态(1.待上磅 2.上磅中 3.已完成)
 	private Integer xejzt=0;//新二检状态(1.待上磅 2.上磅中 3.已完成)
-	private String sjsfzh;
-	private String sjxm;
 	private String cph;
 	private Integer yjbfh=0;//一检磅房号
 	private Integer ejbfh=0;//二检磅房号
 	private Integer lxlx;//流向类型
-	private Float yzxzl;//预装卸重量
-	private Float sjzl;//实际重量
-	private Float zlceb;//重量差额比
 	private Float dj;
 	private Float je;
 	private Integer wzlxId;
