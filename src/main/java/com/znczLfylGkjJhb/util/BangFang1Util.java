@@ -716,14 +716,12 @@ public class BangFang1Util {
 		    		//打印二检过磅记录(现在改为完成一次订单一起打印模式，这里暂时不需要打印了)
 					APIUtil.printGbjl(GuoBangJiLu.CHU_CHANG_GUO_BANG);
 					*/
+					
 					//打印磅单记录
 					/*
 					 * 
 					APIUtil.printBdjl();
-					 */
 					
-					/*
-					 * 
 		    		YinZhuTask.sendMsg(YzZlUtil.get99().replaceAll(" ", ""), 1500,YinZhuTask.ER_JIAN);
 					Thread.sleep(2000);
 		    		YinZhuTask.sendMsg(YzZlUtil.get99().replaceAll(" ", ""), 1500,YinZhuTask.ER_JIAN);
