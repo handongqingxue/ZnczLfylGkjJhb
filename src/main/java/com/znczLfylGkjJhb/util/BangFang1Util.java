@@ -237,7 +237,7 @@ public class BangFang1Util {
 	    		YinZhuTask.sendMsg(YzZlUtil.get97().replaceAll(" ", ""), 1500,YinZhuTask.YI_JIAN);
 				 */
 				
-				float yjzl=(float)5000;
+				float yjzl=(float)500;
 				//float yjzl=(float)DiBangTask3124.getWeight(GuoBangJiLu.RU_CHANG_GUO_BANG);
 
 				if(yjzl>0) {
@@ -255,19 +255,6 @@ public class BangFang1Util {
 			    	System.out.println("生成磅单记录");
 					System.out.println("根据称重出来的重量，添加订单对应的磅单记录");
 					APIUtil.newBangDanJiLu(yjzl, ddId);
-	
-					/*
-			    	if(dd1.getLxlx()==DingDan.SONG_YUN) {
-						System.out.println("更改订单的实际重量、重量差额比");
-				    	DingDan dd2=new DingDan();
-				    	dd2.setYjbfh(bfh);
-				    	dd2.setDdztMc(DingDanZhuangTai.YI_JIAN_SHANG_BANG_TEXT);
-				    	dd2.setYjzt(DingDan.CHENG_ZHONG_ZHONG);
-				    	dd2.setSjzl(mz);
-				    	//dd2.setZlceb(dd1.getYzxzl()/mz);
-				    	APIUtil.editDingDanByZt(dd2);
-			    	}
-			    	*/
 	
 					System.out.println("生成一检过磅记录");
 					GuoBangJiLu gbjl=new GuoBangJiLu();
@@ -681,20 +668,6 @@ public class BangFang1Util {
 				
 					System.out.println("根据称重出来的重量，修改订单对应的磅单记录");
 					APIUtil.editBangDanJiLu(bdId,ejzl,mz,pz,jz);
-				
-					/*
-					 * 
-					if(dd1.getLxlx()==DingDan.QU_YUN) {
-						System.out.println("更改订单的实际重量、重量差额比");
-				    	DingDan dd2=new DingDan();
-				    	dd2.setEjbfh(bfh);
-				    	dd2.setDdztMc(DingDanZhuangTai.ER_JIAN_SHANG_BANG_TEXT);
-				    	dd2.setYjzt(DingDan.YI_WAN_CHENG);
-				    	dd2.setEjzt(DingDan.SHANG_BANG_ZHONG);
-				    	dd2.setSjzl(mz);
-				    	APIUtil.editDingDanByZt(dd2);
-			    	}
-					 */
 				
 					System.out.println("生成二检过磅记录");
 					GuoBangJiLu gbjl=new GuoBangJiLu();
