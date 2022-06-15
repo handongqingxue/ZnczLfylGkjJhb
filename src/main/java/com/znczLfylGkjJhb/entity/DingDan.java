@@ -209,7 +209,7 @@ public class DingDan {
 	private String cph;
 	private Integer yjbfh=0;//一检磅房号
 	private Integer ejbfh=0;//二检磅房号
-	private Integer lxlx;//流向类型
+	private Integer lxlx=0;//流向类型
 	private Float dj;
 	private Float je;
 	private Integer wzlxId;

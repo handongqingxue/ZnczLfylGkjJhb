@@ -151,6 +151,8 @@ public class APIUtil {
 	        parames.put("xddztMc", dd.getXddztMc());
 	        parames.put("xyjzt", dd.getXyjzt());
 	        parames.put("xejzt", dd.getXejzt());
+	        if(dd.getLxlx()>0)
+	        	parames.put("lxlx", dd.getLxlx());
 	        resultJO = doHttp("editDingDanByZt",parames);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -179,11 +181,13 @@ public class APIUtil {
 		}
 	}
 	
-	public static JSONObject editBangDanJiLu(Integer id, Float mz, Float pz, Float jz) {
+	public static JSONObject editBangDanJiLu(Integer id, Float ejzl, Float mz, Float pz, Float jz) {
 		JSONObject resultJO = null;
 		try {
 			Map parames = new HashMap<String, String>();
 	        parames.put("id", id);
+	        if(ejzl!=null)
+	        	parames.put("ejzl", ejzl);
 	        if(mz!=null)
 	        	parames.put("mz", mz);
 	        if(pz!=null)
