@@ -74,9 +74,14 @@ public class ClientSocket implements Runnable {
 			Car car1=new Car();
 			String cph = mesJO.getString("cph");
 			car1.setsLicense(" "+cph);
+			car1.setRglrCph(true);
 			int jyFlag = mesJO.getInt("jyFlag");
 			System.out.println("jyFlag==="+jyFlag);
 			System.out.println("bfh==="+bfh);
+
+			APIUtil.updateCPSBDDXX(car1,bfh);
+			/*
+			 * 
 			switch (jyFlag) {
 			case YI_JIAN:
 				switch (bfh) {
@@ -99,6 +104,7 @@ public class ClientSocket implements Runnable {
 				}
 				break;
 			}
+			 */
 			break;
 		}
 	}

@@ -12,6 +12,7 @@ import java.util.Map.*;
 
 import org.json.JSONObject;
 
+import com.znczLfylGkjJhb.cpsbsxt.Car;
 import com.znczLfylGkjJhb.entity.*;
 import com.znczLfylGkjJhb.task.*;
 import com.znczLfylGkjJhb.xpPrint.*;
@@ -69,6 +70,43 @@ public class APIUtil {
 		JSONObject resultJO = new JSONObject(result);
 		return resultJO;
 	}
+	
+	public static void updateCPSBDDXX(Car car, int bfh) {
+		JSONObject resultJO=getPDZDingDanByCph(car.getsLicense());
+		if(resultJO!=null) {
+			if("ok".equals(resultJO.getString("status"))) {
+				JSONObject dingDanJO = resultJO.getJSONObject("dingDan");
+				String ddztMc = dingDanJO.getString("ddztMc");
+				
+        		//一检车辆识别摄像头
+            	switch (bfh) {
+				case APIUtil.YI_HAO_BANG_FANG:
+					if(DingDanZhuangTai.YI_JIAN_PAI_DUI_ZHONG_TEXT.equals(ddztMc))
+						BangFang1Util.updateYJCPSBDDXX(car);
+					else
+                    	BangFang1Util.updateEJCPSBDDXX(car);
+					break;
+				case APIUtil.ER_HAO_BANG_FANG:
+					if(DingDanZhuangTai.YI_JIAN_PAI_DUI_ZHONG_TEXT.equals(ddztMc))
+						BangFang2Util.updateYJCPSBDDXX(car);
+					else
+                    	BangFang2Util.updateEJCPSBDDXX(car);
+					break;
+				}
+            }
+			else {
+				//一检车辆识别摄像头
+            	switch (bfh) {
+				case APIUtil.YI_HAO_BANG_FANG:
+					BangFang1Util.updateYJCPSBDDXX(car);
+					break;
+				case APIUtil.ER_HAO_BANG_FANG:
+					BangFang2Util.updateYJCPSBDDXX(car);
+					break;
+				}
+			}
+		}
+	}
 
 	public static JSONObject addDingDan(String cph) {
 		// TODO Auto-generated method stub
@@ -112,6 +150,21 @@ public class APIUtil {
 	        parames.put("yjzt", yjzt);
 	        parames.put("ejzt", ejzt);
 	        resultJO = doHttp("getDingDanByZt",parames);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			return resultJO;
+		}
+	}
+	
+	public static JSONObject getPDZDingDanByCph(String cph) {
+		JSONObject resultJO = null;
+		try {
+			Map parames = new HashMap<String, String>();
+	        parames.put("cph", cph);  
+	        resultJO = doHttp("getPDZDingDanByCph",parames);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -381,6 +434,22 @@ public class APIUtil {
 			return resultJO;
 		}
 	}
+
+	public static JSONObject addRglrCphJiLu(String cph, Integer ddId) {
+		JSONObject resultJO = null;
+		try {
+			Map parames = new HashMap<String, String>();
+	        parames.put("cph", cph);
+	        parames.put("ddId", ddId);
+	        resultJO = doHttp("addRglrCphJiLu",parames);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			return resultJO;
+		}
+	}
 	
 	public static void playWeight(float djczl, int jyFlag) {
 		YinZhuTask.sendMsg(YzZlUtil.get98().replaceAll(" ", ""), 1500,jyFlag);
@@ -401,6 +470,8 @@ public class APIUtil {
 	}
 	
 	public static void main(String[] args) {
-		
+		Car car = new Car();
+    	car.setsLicense(" 鲁B9008");
+		APIUtil.updateCPSBDDXX(car,1);
 	}
 }

@@ -46,11 +46,15 @@ public class BangFang1Util {
 		        	System.out.println("改变订单状态为一检上磅");
 					JSONObject ddJO=resultJO.getJSONObject("dingDan");
 		        	DingDan dd=new DingDan();
-		        	dd.setId(ddJO.getInt("id"));
+		        	int ddId = ddJO.getInt("id");
+		        	dd.setId(ddId);
 		        	dd.setDdztMc(DingDanZhuangTai.YI_JIAN_SHANG_BANG_TEXT);
 		        	dd.setYjzt(DingDan.DAI_SHANG_BANG);
 		        	dd.setYjbfh(bfh);
 		        	APIUtil.editDingDan(dd);
+		        	
+		        	if(car.isRglrCph())
+		        		APIUtil.addRglrCphJiLu(cph,ddId);
 		        	
 		        	/*
 		        	 * 
@@ -237,7 +241,7 @@ public class BangFang1Util {
 	    		YinZhuTask.sendMsg(YzZlUtil.get97().replaceAll(" ", ""), 1500,YinZhuTask.YI_JIAN);
 				 */
 				
-				float yjzl=(float)500;
+				float yjzl=(float)2000;
 				//float yjzl=(float)DiBangTask3124.getWeight(GuoBangJiLu.RU_CHANG_GUO_BANG);
 
 				if(yjzl>0) {
@@ -844,8 +848,8 @@ public class BangFang1Util {
 	
 	public static void main(String[] args) {
 		Car car = new Car();
-    	car.setsLicense(" 鲁B9001");
+    	car.setsLicense(" 鲁B9008");
     	//updateYJCPSBDDXX(car);
-		updateEJCPSBDDXX(car);
+    	updateEJCPSBDDXX(car);
 	}
 }

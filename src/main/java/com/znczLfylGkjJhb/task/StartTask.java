@@ -11,6 +11,8 @@ public class StartTask {
 	private static SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	public static void main(String[] args) {
+		/*
+		 * 
 		// 车牌识别的线程任务
 		CpsbsxtTask cpsbsxtTask = new CpsbsxtTask();
 		cpsbsxtTask.start();
@@ -20,6 +22,7 @@ public class StartTask {
 		
 		ErJianJdq ejjdq=new ErJianJdq();
 		JdqZlUtil.setEjjdq(ejjdq);
+		 */
 
 		//testLiuCheng();
 		

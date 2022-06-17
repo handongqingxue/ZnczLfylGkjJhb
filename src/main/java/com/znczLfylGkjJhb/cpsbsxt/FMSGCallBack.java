@@ -176,48 +176,9 @@ public class FMSGCallBack implements HCNetSDK.FMSGCallBack
             	int bfh = LoadProperties.getBangFangHao();
             	String ip = car.getIp().trim();
             	if(LoadProperties.getHikvisionYiJianIP().equals(ip)) {
-            		JSONObject resultJO=null;
-            		resultJO=APIUtil.getDingDan(car.getsLicense(),DingDanZhuangTai.YI_JIAN_PAI_DUI_ZHONG_TEXT);
-            		if(resultJO!=null) {
-	                    if("ok".equals(resultJO.getString("status"))) {
-	                		//一检车辆识别摄像头
-	                    	switch (bfh) {
-							case APIUtil.YI_HAO_BANG_FANG:
-								BangFang1Util.updateYJCPSBDDXX(car);
-								break;
-							case APIUtil.ER_HAO_BANG_FANG:
-								BangFang2Util.updateYJCPSBDDXX(car);
-								break;
-							}
-	                    }
-	                    else {
-	                		//目前地磅处只有一个摄像头，先用这个摄像头负责二检
-	                		resultJO=APIUtil.getDingDan(car.getsLicense(),DingDanZhuangTai.ER_JIAN_PAI_DUI_ZHONG_TEXT);
-	                		if(resultJO!=null) {
-	    	                    if("ok".equals(resultJO.getString("status"))) {
-	    	                		//二检车辆识别摄像头
-	    	                    	switch (bfh) {
-									case APIUtil.YI_HAO_BANG_FANG:
-		    	                    	BangFang1Util.updateEJCPSBDDXX(car);
-										break;
-									case APIUtil.ER_HAO_BANG_FANG:
-										BangFang2Util.updateEJCPSBDDXX(car);
-										break;
-									}
-	    	                    }
-	    	                    else {
-		                        	System.out.println("message==="+resultJO.getString("message"));
-		                        	System.out.println("音柱播报：没有找到匹配订单");
-		                    		YinZhuTask.sendMsg(YzZlUtil.get86().replaceAll(" ", ""), 1500,YinZhuTask.YI_JIAN);
-	    	                    }
-	                		}
-	                    }
-            		}
+            		APIUtil.updateCPSBDDXX(car,bfh);
             	} else if (LoadProperties.getHikvisionErJianIP().equals(ip)) {
             		//二检车辆识别摄像头
-            		//uploadingCarInfoLiChang(car);
-            		//APIUtil.updateEJCPSBDDXX(car);
-            		
             		JSONObject resultJO=null;
             		resultJO=APIUtil.getDingDan(car.getsLicense(),DingDanZhuangTai.ER_JIAN_PAI_DUI_ZHONG_TEXT);
             		if(resultJO!=null) {

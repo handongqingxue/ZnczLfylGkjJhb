@@ -15,7 +15,8 @@ public class Car {
 	private byte sLicenseColor;
 	// 车牌颜色
 	private String sLicenseColorStr;
-	
+	private boolean isRglrCph;
+
 	// 图片二进制
 	 byte [] bytes=null;
 	
@@ -58,6 +59,13 @@ public class Car {
 	}
 	public void setTypeStr(String typeStr) {
 		this.typeStr = typeStr;
+	}
+	
+	public boolean isRglrCph() {
+		return isRglrCph;
+	}
+	public void setRglrCph(boolean isRglrCph) {
+		this.isRglrCph = isRglrCph;
 	}
 	
 	
