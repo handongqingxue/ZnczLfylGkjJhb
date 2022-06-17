@@ -75,36 +75,8 @@ public class ClientSocket implements Runnable {
 			String cph = mesJO.getString("cph");
 			car1.setsLicense(" "+cph);
 			car1.setRglrCph(true);
-			int jyFlag = mesJO.getInt("jyFlag");
-			System.out.println("jyFlag==="+jyFlag);
 			System.out.println("bfh==="+bfh);
-
 			APIUtil.updateCPSBDDXX(car1,bfh);
-			/*
-			 * 
-			switch (jyFlag) {
-			case YI_JIAN:
-				switch (bfh) {
-				case APIUtil.YI_HAO_BANG_FANG:
-					BangFang1Util.updateYJCPSBDDXX(car1);
-					break;
-				case APIUtil.ER_HAO_BANG_FANG:
-					BangFang2Util.updateYJCPSBDDXX(car1);
-					break;
-				}
-				break;
-			case ER_JIAN:
-				switch (bfh) {
-				case APIUtil.YI_HAO_BANG_FANG:
-					BangFang1Util.updateEJCPSBDDXX(car1);
-					break;
-				case APIUtil.ER_HAO_BANG_FANG:
-					BangFang2Util.updateEJCPSBDDXX(car1);
-					break;
-				}
-				break;
-			}
-			 */
 			break;
 		}
 	}
