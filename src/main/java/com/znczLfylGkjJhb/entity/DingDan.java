@@ -223,4 +223,25 @@ public class DingDan {
 	private Integer shbmId;
 	private String shbmMc;
 	private String bjsj;//编辑时间
+	private Integer clId;
+	private Integer clLx;//车辆类型 1.陌生车辆 2.待识别车辆 3.已识别车辆
+	public Integer getClId() {
+		return clId;
+	}
+	public void setClId(Integer clId) {
+		this.clId = clId;
+	}
+	public Integer getClLx() {
+		return clLx;
+	}
+	public void setClLx(Integer clLx) {
+		this.clLx = clLx;
+	}
+	private Integer clWcddcs;
+	public Integer getClWcddcs() {
+		return clWcddcs;
+	}
+	public void setClWcddcs(Integer clWcddcs) {
+		this.clWcddcs = clWcddcs;
+	}
 }

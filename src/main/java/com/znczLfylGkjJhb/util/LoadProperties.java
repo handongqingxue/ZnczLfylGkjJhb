@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 public class LoadProperties {
 	static Logger logger = LoggerFactory.getLogger(LoadProperties.class);
 	private static Properties prop = null;
-	private static final int CURRENT_BF_NO=1;//1.托利多(新磅房) 2.耀华(旧磅房)
+	private static final int CURRENT_BF_NO=2;//1.托利多(新磅房) 2.耀华(旧磅房)
 	private static final int YI_HAO_BANG_FANG=1;
 	private static final int ER_HAO_BANG_FANG=2;
 	//private static final boolean IS_TEST=true;//是否是测试

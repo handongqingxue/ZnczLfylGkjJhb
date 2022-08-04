@@ -206,8 +206,8 @@ public class BangFang2Util {
 				Thread.sleep(15000);
 	    		YinZhuTask.sendMsg(YzZlUtil.get97().replaceAll(" ", ""), 1500,YinZhuTask.YI_JIAN);
 
-	    		//float yjzl=(float)500;
-				float yjzl=(float)DiBangTask3190.getWeight(GuoBangJiLu.RU_CHANG_GUO_BANG);
+	    		float yjzl=(float)500;
+				//float yjzl=(float)DiBangTask3190.getWeight(GuoBangJiLu.RU_CHANG_GUO_BANG);
 				
 				if(yjzl>0) {
 					APIUtil.playWeight(yjzl,YinZhuTask.YI_JIAN);
@@ -566,8 +566,8 @@ public class BangFang2Util {
 				JSONObject bdJO=gbjlJO.getJSONObject("bdjl");
 				int bdId = bdJO.getInt("id");
 				yjzl=(float)bdJO.getDouble("yjzl");
-				//ejzl=1300;
-				ejzl=(float)DiBangTask3190.getWeight(GuoBangJiLu.CHU_CHANG_GUO_BANG);
+				ejzl=300;
+				//ejzl=(float)DiBangTask3190.getWeight(GuoBangJiLu.CHU_CHANG_GUO_BANG);
 
 				if(yjzl>ejzl) {
 					lxlx=DingDan.SONG_YUN;

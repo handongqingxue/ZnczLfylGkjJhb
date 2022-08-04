@@ -20,8 +20,8 @@ import com.znczLfylGkjJhb.yz.*;
 
 public class APIUtil {
 	
-	//public static final String SERVICE_URL="http://10.10.99.20:8080/ZnczLfylJhb/gkj/";
-	public static final String SERVICE_URL="http://localhost:8080/ZnczLfylJhb/gkj/";
+	public static final String SERVICE_URL="http://10.10.99.20:8080/ZnczLfylJhb/gkj/";
+	//public static final String SERVICE_URL="http://localhost:8080/ZnczLfylJhb/gkj/";
 	public static final int YI_HAO_BANG_FANG=1;
 	public static final int ER_HAO_BANG_FANG=2;
 
@@ -87,10 +87,20 @@ public class APIUtil {
                     	BangFang1Util.updateEJCPSBDDXX(car);
 					break;
 				case APIUtil.ER_HAO_BANG_FANG:
-					if(DingDanZhuangTai.YI_JIAN_PAI_DUI_ZHONG_TEXT.equals(ddztMc))
-						BangFang2Util.updateYJCPSBDDXX(car);
-					else
-                    	BangFang2Util.updateEJCPSBDDXX(car);
+					if(DingDanZhuangTai.YI_JIAN_PAI_DUI_ZHONG_TEXT.equals(ddztMc)) {
+						System.out.println("重复识别了111。。。。。。。。。。");
+						JSONObject cpsbJO = APIUtil.checkIfCPSB(car.getsLicense());
+						System.out.println("cpsbJO:status识别了==="+cpsbJO.get("status"));
+						if("ok".equals(cpsbJO.get("status")))
+							BangFang2Util.updateYJCPSBDDXX(car);
+					}
+					else {
+						System.out.println("重复识别了222。。。。。。。。。。");
+						JSONObject cpsbJO = APIUtil.checkIfCPSB(car.getsLicense());
+						System.out.println("cpsbJO:status识别了==="+cpsbJO.get("status"));
+						if("ok".equals(cpsbJO.get("status")))
+							BangFang2Util.updateEJCPSBDDXX(car);
+					}
 					break;
 				}
             }
@@ -101,6 +111,7 @@ public class APIUtil {
 					BangFang1Util.updateYJCPSBDDXX(car);
 					break;
 				case APIUtil.ER_HAO_BANG_FANG:
+					System.out.println("重复识别了333。。。。。。。。。。");
 					BangFang2Util.updateYJCPSBDDXX(car);
 					break;
 				}
@@ -301,6 +312,21 @@ public class APIUtil {
 			parames.put("yjzt", yjzt);
 			parames.put("ejzt", ejzt);
 			resultJO = doHttp("checkDingDanIfExistByZt",parames);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			return resultJO;
+		}
+	}
+	
+	public static JSONObject checkIfCPSB(String cph) {
+		JSONObject resultJO = null;
+		try {
+			Map parames = new HashMap<String, String>();
+			parames.put("cph", cph);
+			resultJO = doHttp("checkIfCPSB",parames);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
