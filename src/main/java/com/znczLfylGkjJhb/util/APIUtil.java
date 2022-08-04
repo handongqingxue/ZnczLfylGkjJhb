@@ -74,14 +74,13 @@ public class APIUtil {
 	public static void updateCPSBDDXX(Car car, int bfh) {
 		JSONObject resultJO=getPDZDingDanByCph(car.getsLicense());
 		if(resultJO!=null) {
-			if("ok".equals(resultJO.getString("status"))) {
+			if("ok".equals(resultJO.getString("status"))) {//根据车牌号查询排队中的订单，若存在执行下面方法
 				JSONObject dingDanJO = resultJO.getJSONObject("dingDan");
 				String ddztMc = dingDanJO.getString("ddztMc");
 				
-        		//一检车辆识别摄像头
             	switch (bfh) {
 				case APIUtil.YI_HAO_BANG_FANG:
-					if(DingDanZhuangTai.YI_JIAN_PAI_DUI_ZHONG_TEXT.equals(ddztMc)) {
+					if(DingDanZhuangTai.YI_JIAN_PAI_DUI_ZHONG_TEXT.equals(ddztMc)) {//判断是否是一检状态（可能之前一检过磅失败了，订单复位回去需要重新一检）
 						BangFang1Util.updateYJCPSBDDXX(car);
 					}
 					else {
@@ -91,7 +90,7 @@ public class APIUtil {
 				case APIUtil.ER_HAO_BANG_FANG:
 					if(DingDanZhuangTai.YI_JIAN_PAI_DUI_ZHONG_TEXT.equals(ddztMc)) {
 						System.out.println("重复识别了111。。。。。。。。。。");
-						JSONObject cpsbJO = APIUtil.checkIfCPSB(car.getsLicense());
+						JSONObject cpsbJO = APIUtil.checkIfCPSB(car.getsLicense());//若在旧磅房过磅，避免出现下磅后重复识别现象，得验证下是否刚下磅
 						System.out.println("cpsbJO:status识别了==="+cpsbJO.get("status"));
 						if("ok".equals(cpsbJO.get("status")))
 							BangFang2Util.updateYJCPSBDDXX(car);
@@ -106,11 +105,10 @@ public class APIUtil {
 					break;
 				}
             }
-			else {
-				//一检车辆识别摄像头
+			else {//根据车牌号查询排队中的订单，若不存在执行下面方法
             	switch (bfh) {
 				case APIUtil.YI_HAO_BANG_FANG:
-					BangFang1Util.updateYJCPSBDDXX(car);
+					BangFang1Util.updateYJCPSBDDXX(car);//若订单不存在，肯定需要先一检
 					break;
 				case APIUtil.ER_HAO_BANG_FANG:
 					System.out.println("重复识别了333。。。。。。。。。。");
@@ -326,6 +324,11 @@ public class APIUtil {
 		}
 	}
 	
+	/**
+	 * 根据车牌号验证车辆是否可以上磅
+	 * @param cph
+	 * @return
+	 */
 	public static JSONObject checkIfCPSB(String cph) {
 		JSONObject resultJO = null;
 		try {
