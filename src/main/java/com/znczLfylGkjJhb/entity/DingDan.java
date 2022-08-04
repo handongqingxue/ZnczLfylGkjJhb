@@ -119,6 +119,24 @@ public class DingDan {
 	public void setLxlx(Integer lxlx) {
 		this.lxlx = lxlx;
 	}
+	public Integer getClId() {
+		return clId;
+	}
+	public void setClId(Integer clId) {
+		this.clId = clId;
+	}
+	public Integer getClLx() {
+		return clLx;
+	}
+	public void setClLx(Integer clLx) {
+		this.clLx = clLx;
+	}
+	public Integer getClWcddcs() {
+		return clWcddcs;
+	}
+	public void setClWcddcs(Integer clWcddcs) {
+		this.clWcddcs = clWcddcs;
+	}
 	public Float getDj() {
 		return dj;
 	}
@@ -210,6 +228,9 @@ public class DingDan {
 	private Integer yjbfh=0;//一检磅房号
 	private Integer ejbfh=0;//二检磅房号
 	private Integer lxlx=0;//流向类型
+	private Integer clId;
+	private Integer clLx;//车辆类型 1.陌生车辆 2.待识别车辆 3.已识别车辆
+	private Integer clWcddcs;
 	private Float dj;
 	private Float je;
 	private Integer wzlxId;
@@ -223,25 +244,4 @@ public class DingDan {
 	private Integer shbmId;
 	private String shbmMc;
 	private String bjsj;//编辑时间
-	private Integer clId;
-	private Integer clLx;//车辆类型 1.陌生车辆 2.待识别车辆 3.已识别车辆
-	public Integer getClId() {
-		return clId;
-	}
-	public void setClId(Integer clId) {
-		this.clId = clId;
-	}
-	public Integer getClLx() {
-		return clLx;
-	}
-	public void setClLx(Integer clLx) {
-		this.clLx = clLx;
-	}
-	private Integer clWcddcs;
-	public Integer getClWcddcs() {
-		return clWcddcs;
-	}
-	public void setClWcddcs(Integer clWcddcs) {
-		this.clWcddcs = clWcddcs;
-	}
 }

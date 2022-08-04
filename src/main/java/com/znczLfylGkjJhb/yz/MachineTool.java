@@ -15,7 +15,7 @@ import gnu.io.UnsupportedCommOperationException;
 
 public class MachineTool {
 
-	public static final String USED_PORT_NAME="COM4";
+	public static final String USED_PORT_NAME="COM1";
 	
 	/**
      * 类方法 不可改变 不接受继承
