@@ -81,10 +81,12 @@ public class APIUtil {
         		//一检车辆识别摄像头
             	switch (bfh) {
 				case APIUtil.YI_HAO_BANG_FANG:
-					if(DingDanZhuangTai.YI_JIAN_PAI_DUI_ZHONG_TEXT.equals(ddztMc))
+					if(DingDanZhuangTai.YI_JIAN_PAI_DUI_ZHONG_TEXT.equals(ddztMc)) {
 						BangFang1Util.updateYJCPSBDDXX(car);
-					else
+					}
+					else {
                     	BangFang1Util.updateEJCPSBDDXX(car);
+					}
 					break;
 				case APIUtil.ER_HAO_BANG_FANG:
 					if(DingDanZhuangTai.YI_JIAN_PAI_DUI_ZHONG_TEXT.equals(ddztMc)) {
@@ -112,7 +114,10 @@ public class APIUtil {
 					break;
 				case APIUtil.ER_HAO_BANG_FANG:
 					System.out.println("重复识别了333。。。。。。。。。。");
-					BangFang2Util.updateYJCPSBDDXX(car);
+					JSONObject cpsbJO = APIUtil.checkIfCPSB(car.getsLicense());
+					System.out.println("cpsbJO:status识别了==="+cpsbJO.get("status"));
+					if("ok".equals(cpsbJO.get("status")))
+						BangFang2Util.updateYJCPSBDDXX(car);
 					break;
 				}
 			}
