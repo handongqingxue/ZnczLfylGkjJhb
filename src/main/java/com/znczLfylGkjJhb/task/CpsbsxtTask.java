@@ -8,6 +8,7 @@ import com.znczLfylGkjJhb.util.LoadProperties;
 
 public class CpsbsxtTask extends Thread {
 	static HCNetSDK hCNetSDK = HCNetSDK.INSTANCE;
+	static FMSGCallBack fMSFCallBack;
 
 	@Override
 	public void run() {
@@ -16,7 +17,8 @@ public class CpsbsxtTask extends Thread {
 		
 		System.out.println("initSuc: " + initSuc);
 		//  注册回调
-	 	FMSGCallBack fMSFCallBack = new FMSGCallBack();  //报警回调函数实现
+	 	//FMSGCallBack fMSFCallBack = new FMSGCallBack();  //报警回调函数实现
+	 	fMSFCallBack = new FMSGCallBack();  //报警回调函数实现
 		Pointer pUser = null;
 		hCNetSDK.NET_DVR_SetDVRMessageCallBack_V30(fMSFCallBack, pUser );
 		

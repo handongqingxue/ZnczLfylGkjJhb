@@ -9,10 +9,11 @@ import com.znczLfylGkjJhb.socket.*;
 public class StartTask {
 	
 	private static SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	static CpsbsxtTask cpsbsxtTask;
 
 	public static void main(String[] args) {
 		// 车牌识别的线程任务
-		CpsbsxtTask cpsbsxtTask = new CpsbsxtTask();
+		cpsbsxtTask = new CpsbsxtTask();
 		cpsbsxtTask.start();
 		
 		YiJianJdq yjjdq=new YiJianJdq();
@@ -31,6 +32,7 @@ public class StartTask {
 			// main程序一直运行
 			try {
 				Thread.sleep(5000);
+				System.out.println("运行中。。。");
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -43,20 +43,6 @@ public class FMSGCallBack implements HCNetSDK.FMSGCallBack
     	
     	System.out.println("车辆识别报警回调函数触发");
     	
-    	
-//    	车牌识别的报警信息类型为COMM_ITS_PLATE_RESULT（新报警信息）和COMM_UPLOAD_PLATE_RESULT（老报警信息），
-//    	分别对应接口NET_DVR_SetupAlarmChan_V41中布防参数byAlarmInfoType=1和byAlarmInfoType=0。
-//    			1）设备是否支持新报警信息可从注册返回的能力获知，详见NET_DVR_DEVICEINFO_V30结构
-//    			中bySupport1&0x80（表示是否支持车牌新报警信息），如果注册返回能力不支持，设备仅支持老报警信息上传。
-//        String sAlarmType = new String();
-////        DefaultTableModel alarmTableModel = ((DefaultTableModel) jTableAlarm.getModel());//获取表格模型
-//        String[] newRow = new String[3];
-//        //报警时间
-//        Date today = new Date();
-//        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-//        String[] sIP = new String[2];
-    	
-    	
     	 String sAlarmType = new String();
          DefaultTableModel alarmTableModel = ((DefaultTableModel) jTableAlarm.getModel());//获取表格模型
          String[] newRow = new String[3];
@@ -93,7 +79,6 @@ public class FMSGCallBack implements HCNetSDK.FMSGCallBack
             Pointer pPlateInfo = strPlateResult.getPointer();
 			byte[] buf = new byte[1024];
 			
-//			            pPlateInfo.write(0, pAlarmInfo.getByteArray(0, strPlateResult.size()), 0, strPlateResult.size());
             pPlateInfo.write(0, pAlarmInfo.RecvBuffer, 0, strPlateResult.size());
             strPlateResult.read();
             String srt3 = "";
@@ -135,42 +120,8 @@ public class FMSGCallBack implements HCNetSDK.FMSGCallBack
 
             System.out.println("图片长度： strPlateResult.dwPicLen: " + strPlateResult.dwPicLen);
             
-            /*
-            if(strPlateResult.dwPicLen>0)
-            {
-                SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmss");
-                String newName = sf.format(new Date());
-                FileOutputStream fout;
-                try {
-                	
-                	String photoPath = LoadProperties.getPhotoPath();
-                	
-                    fout = new FileOutputStream(photoPath+ File.separator + new String(pAlarmer.sDeviceIP).trim() + "_"
-                            + newName+"_plateResult.jpg");
-                    //将字节写入文件
-                    long offset = 0;
-                    ByteBuffer buffers = strPlateResult.pBuffer1.getByteBuffer(offset, strPlateResult.dwPicLen);
-                    byte [] bytes = new byte[strPlateResult.dwPicLen];
-                    buffers.rewind();
-                    buffers.get(bytes);
-                    fout.write(bytes);
-                    
-                    car.setBytes(bytes);
-                    fout.close();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            */
-            
             // 车牌的对象
             System.out.println(car.toString());
-            
-            // 拿到车牌对象的 car
-            // 根据车牌号， 查询有匹配的待入厂的订单, 如果有则抬杆， 修改订单状态为【已入厂】，排队号的状态改为【受理中】
-            // 创建台账信息， 台账信息包含【车辆入场时间】、【车辆入场照片】、【台账与订单、车辆建立关系】
             
             try {
             	int bfh = LoadProperties.getBangFangHao();
