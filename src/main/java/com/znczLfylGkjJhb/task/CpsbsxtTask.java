@@ -6,6 +6,7 @@ import com.znczLfylGkjJhb.cpsbsxt.*;
 import com.znczLfylGkjJhb.cpsbsxt.HCNetSDK.NET_DVR_DEVICEINFO_V30;
 import com.znczLfylGkjJhb.util.LoadProperties;
 
+//DS-TCG205-B型号
 public class CpsbsxtTask extends Thread {
 	static HCNetSDK hCNetSDK = HCNetSDK.INSTANCE;
 	static FMSGCallBack fMSFCallBack;
@@ -16,6 +17,11 @@ public class CpsbsxtTask extends Thread {
 		boolean initSuc = hCNetSDK.NET_DVR_Init();
 		
 		System.out.println("initSuc: " + initSuc);
+		if (initSuc != true){
+			System.out.println("初始化失败");
+		}
+		initSuc = hCNetSDK.NET_DVR_SetLogToFile(3,"d:sdklog",false);
+		
 		//  注册回调
 	 	//FMSGCallBack fMSFCallBack = new FMSGCallBack();  //报警回调函数实现
 	 	fMSFCallBack = new FMSGCallBack();  //报警回调函数实现

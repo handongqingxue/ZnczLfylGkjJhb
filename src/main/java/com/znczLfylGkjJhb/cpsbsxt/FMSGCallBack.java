@@ -57,6 +57,7 @@ public class FMSGCallBack implements HCNetSDK.FMSGCallBack
 //        COMM_ITS_PLATE_RESULT	0x3050	 12368 (十进制) 交通抓拍结果(新报警信息)	
 //        COMM_UPLOAD_PLATE_RESULT	0x2800   10240 (十进制)	交通抓拍结果
         //lCommand是传的报警类型
+        //COMM_VEHICLE_CONTROL_LIST_DSALARM 0x3058 车辆黑白名单数据需要同步报警上传 NET_DVR_VEHICLE_CONTROL_LIST_DSALARM
         switch (lCommand.intValue())
         {
         	

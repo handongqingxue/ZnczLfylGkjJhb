@@ -30,15 +30,17 @@ public class StartTask {
 		// 其他线程启动
 		while (true) {
 			// main程序一直运行
+			String nowTimeStr = sdf.format(new Date());
 			try {
 				Thread.sleep(5000);
-				System.out.println("运行中。。。");
-			} catch (InterruptedException e) {
+				System.out.println("运行中。。。"+nowTimeStr);
+				
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if(!cs.isServerOpend()) {
-				System.out.println("与服务器端通讯断开了，正在重新建立连接,时间:"+sdf.format(new Date()));
+				System.out.println("与服务器端通讯断开了，正在重新建立连接,时间:"+nowTimeStr);
 				cs.connectServer();
 			}
 		}

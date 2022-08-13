@@ -8,7 +8,7 @@ public class Test {
 
 	public static void main(String[] args) {
 		 boolean initSuc = hCNetSDK.NET_DVR_Init();
-         hCNetSDK.NET_DVR_SetLogToFile(true,"C:SdkLog", true);
+         hCNetSDK.NET_DVR_SetLogToFile(3,"d:SdkLog", true);
 		 System.out.println("initSuc: " + initSuc);
 	}
 }
