@@ -26,7 +26,7 @@ public class BangFang2Util {
 	        	System.out.println("存在该订单");
 	        	System.out.println("根据其他订单状态验证是否存在其他订单");
 	        	Integer bfh = LoadProperties.getBangFangHao();
-	        	JSONObject ddExistResult = APIUtil.checkDingDanIfExistByZt(bfh,0,DingDanZhuangTai.YI_JIAN_SHANG_BANG_TEXT,DingDan.DAI_SHANG_BANG,DingDan.DAI_SHANG_BANG);
+	        	JSONObject ddExistResult = APIUtil.checkDingDanIfExistByZt(bfh,DingDanZhuangTai.CHECK_SHANG_BANG_TEXT);
 	        	if("ok".equals(ddExistResult.getString("status"))) {
 	            	System.out.println("音柱播报：其他订单状态存在其他订单");
 	        	}
@@ -375,7 +375,7 @@ public class BangFang2Util {
 	        if("ok".equals(resultJO.getString("status"))) {
 	        	System.out.println("存在该订单");
 	        	System.out.println("根据其他订单状态验证是否存在其他订单");
-	        	JSONObject ddExistResult = APIUtil.checkDingDanIfExistByZt(0,bfh,DingDanZhuangTai.ER_JIAN_SHANG_BANG_TEXT,DingDan.YI_WAN_CHENG,DingDan.DAI_SHANG_BANG);
+	        	JSONObject ddExistResult = APIUtil.checkDingDanIfExistByZt(bfh,DingDanZhuangTai.CHECK_SHANG_BANG_TEXT);
 	        	if("ok".equals(ddExistResult.getString("status"))) {
 	            	System.out.println("音柱播报：其他订单状态存在其他订单");
 	        	}
@@ -574,11 +574,18 @@ public class BangFang2Util {
 					mz=yjzl;
 					pz=ejzl;
 				}
+				else {
+					lxlx=DingDan.QU_YUN;
+					pz=yjzl;
+					mz=ejzl;
+				}
+				/*
 				else if(yjzl<ejzl) {
 					lxlx=DingDan.QU_YUN;
 					pz=yjzl;
 					mz=ejzl;
 				}
+				*/
 				jz=mz-pz;
 				
 				if(ejzl>0) {

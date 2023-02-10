@@ -303,17 +303,12 @@ public class APIUtil {
 		}
 	}
 	
-	public static JSONObject checkDingDanIfExistByZt(Integer yjbfh,Integer ejbfh,String ddztMc, Integer yjzt, Integer ejzt) {
+	public static JSONObject checkDingDanIfExistByZt(Integer checkBfh,String checkDdztMc) {
 		JSONObject resultJO = null;
 		try {
 			Map parames = new HashMap<String, String>();
-			if(yjbfh!=0)
-				parames.put("yjbfh", yjbfh);
-			if(ejbfh!=0)
-				parames.put("ejbfh", ejbfh);
-			parames.put("ddztMc", ddztMc);
-			parames.put("yjzt", yjzt);
-			parames.put("ejzt", ejzt);
+			parames.put("checkBfh", checkBfh);
+			parames.put("checkDdztMc", checkDdztMc);
 			resultJO = doHttp("checkDingDanIfExistByZt",parames);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

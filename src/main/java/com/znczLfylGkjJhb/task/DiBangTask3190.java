@@ -70,8 +70,9 @@ public class DiBangTask3190 {
 						if(steadyCount>5) {
 							break;
 						}
-						if(waitTime>10) {
-							weight=-1;
+						if(waitTime>10) {//光栅被遮挡
+							//weight=-1;
+							weight=2;
 							break;
 						}
 						
@@ -94,25 +95,29 @@ public class DiBangTask3190 {
 							System.out.println("称重中open2==="+kgl2Open);
 						}
 						
+						/*
+						 * 光栅被遮挡情况先忽略掉
 						if(kgl1Open||kgl2Open) {
 							System.out.println("光栅被遮挡");
 							steadyCount=0;
 							waitTime++;
 						}
 						else {
+						*/
 							waitTime=0;
 							if(weight<=preWeight+preWeight*0.3||weight>=preWeight-preWeight*0.3)
 								steadyCount++;
 							else
 								steadyCount=0;
 							preWeight=weight;
-						}
+						//}
 					//}
 				} 
 	            else {
 	            	System.out.println("串口号：" + name + "接收到的数据为空！");
 					if(waitTime>10) {
-						weight=-1;
+						//weight=-1;
+						weight=1;
 						break;
 					}
 					steadyCount=0;

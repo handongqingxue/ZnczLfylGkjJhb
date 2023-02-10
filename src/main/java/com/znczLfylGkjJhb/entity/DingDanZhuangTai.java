@@ -7,6 +7,7 @@ public class DingDanZhuangTai {
 	public static final String ER_JIAN_PAI_DUI_ZHONG_TEXT="二检排队中";//3
 	public static final String ER_JIAN_SHANG_BANG_TEXT="二检上磅";//4
 	public static final String YI_WAN_CHENG_TEXT="已完成";//5
+	public static final String CHECK_SHANG_BANG_TEXT="上磅";
 
 	private Integer id;
 	public Integer getId() {
