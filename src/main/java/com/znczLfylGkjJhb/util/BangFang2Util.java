@@ -136,23 +136,38 @@ public class BangFang2Util {
 				System.out.println("后open2==="+jdq.isKgl2Open());
 				System.out.println("waitTime==="+waitTime);
 				if(waitTime>30*1000) {
-					System.out.println("称重失败，请重新车牌识别");
-					System.out.println("查找订单状态为一检上磅的订单，将一检上磅状态从待上磅更改为一检排队中");
-					DingDan dd=new DingDan();
-					dd.setYjbfh(bfh);
-					dd.setDdztMc(DingDanZhuangTai.YI_JIAN_SHANG_BANG_TEXT);
-					dd.setXddztMc(DingDanZhuangTai.YI_JIAN_PAI_DUI_ZHONG_TEXT);
-					dd.setYjzt(DingDan.SHANG_BANG_ZHONG);
-					dd.setXyjzt(DingDan.DAI_SHANG_BANG);
-					APIUtil.editDingDanByZt(dd);
-					
-					waitTime+=1000;
-		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
-		    		JdqBf2Util.openYiJianXiaBangDz();
-		        	JdqZlUtil.closeJdq();
-					Thread.sleep(2000);
-		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
-					break;
+					int weight = DiBangTask3190.getTestWeight();
+					if(weight>0) {
+						System.out.println("查找订单状态为一检上磅的订单，将一检上磅状态从上磅中更改为待称重");
+						DingDan dd=new DingDan();
+						dd.setYjbfh(bfh);
+						dd.setDdztMc(DingDanZhuangTai.YI_JIAN_SHANG_BANG_TEXT);
+						dd.setYjzt(DingDan.SHANG_BANG_ZHONG);
+						dd.setXyjzt(DingDan.DAI_CHENG_ZHONG);
+						APIUtil.editDingDanByZt(dd);
+						
+						yiJianChengZhongZhong();
+						break;
+					}
+					else {
+						System.out.println("称重失败，请重新车牌识别");
+						System.out.println("查找订单状态为一检上磅的订单，将一检上磅状态从待上磅更改为一检排队中");
+						DingDan dd=new DingDan();
+						dd.setYjbfh(bfh);
+						dd.setDdztMc(DingDanZhuangTai.YI_JIAN_SHANG_BANG_TEXT);
+						dd.setXddztMc(DingDanZhuangTai.YI_JIAN_PAI_DUI_ZHONG_TEXT);
+						dd.setYjzt(DingDan.SHANG_BANG_ZHONG);
+						dd.setXyjzt(DingDan.DAI_SHANG_BANG);
+						APIUtil.editDingDanByZt(dd);
+						
+						waitTime+=1000;
+			    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
+			    		JdqBf2Util.openYiJianXiaBangDz();
+			        	JdqZlUtil.closeJdq();
+						Thread.sleep(2000);
+			    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
+						break;
+					}
 				}
 				else if(waitTime%(5*1000)==0) {
 					waitTime+=1000;
@@ -484,23 +499,38 @@ public class BangFang2Util {
 				System.out.println("后open2==="+jdq.isKgl2Open());
 				System.out.println("waitTime==="+waitTime);
 				if(waitTime>30*1000) {
-					System.out.println("称重失败，请重新车牌识别");
-					System.out.println("查找订单状态为二检上磅的订单，将二检上磅状态从待上磅更改为二检排队中");
-					DingDan dd=new DingDan();
-					dd.setEjbfh(bfh);
-					dd.setDdztMc(DingDanZhuangTai.ER_JIAN_SHANG_BANG_TEXT);
-					dd.setXddztMc(DingDanZhuangTai.ER_JIAN_PAI_DUI_ZHONG_TEXT);
-					dd.setEjzt(DingDan.SHANG_BANG_ZHONG);
-					dd.setXejzt(DingDan.DAI_SHANG_BANG);
-					APIUtil.editDingDanByZt(dd);
-					
-					waitTime+=1000;
-		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
-		    		JdqBf2Util.openYiJianXiaBangDz();
-		        	JdqZlUtil.closeJdq();
-					Thread.sleep(2000);
-		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
-					break;
+					int weight = DiBangTask3190.getTestWeight();
+					if(weight>0) {
+						System.out.println("查找订单状态为二检上磅的订单，将二检上磅状态从上磅中更改为待称重");
+						DingDan dd=new DingDan();
+						dd.setEjbfh(bfh);
+						dd.setDdztMc(DingDanZhuangTai.ER_JIAN_SHANG_BANG_TEXT);
+						dd.setEjzt(DingDan.SHANG_BANG_ZHONG);
+						dd.setXejzt(DingDan.DAI_CHENG_ZHONG);
+						APIUtil.editDingDanByZt(dd);
+						
+						erJianChengZhongZhong();
+						break;
+					}
+					else {
+						System.out.println("称重失败，请重新车牌识别");
+						System.out.println("查找订单状态为二检上磅的订单，将二检上磅状态从待上磅更改为二检排队中");
+						DingDan dd=new DingDan();
+						dd.setEjbfh(bfh);
+						dd.setDdztMc(DingDanZhuangTai.ER_JIAN_SHANG_BANG_TEXT);
+						dd.setXddztMc(DingDanZhuangTai.ER_JIAN_PAI_DUI_ZHONG_TEXT);
+						dd.setEjzt(DingDan.SHANG_BANG_ZHONG);
+						dd.setXejzt(DingDan.DAI_SHANG_BANG);
+						APIUtil.editDingDanByZt(dd);
+						
+						waitTime+=1000;
+			    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
+			    		JdqBf2Util.openYiJianXiaBangDz();
+			        	JdqZlUtil.closeJdq();
+						Thread.sleep(2000);
+			    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
+						break;
+					}
 				}
 				else if(waitTime%(5*1000)==0) {
 					waitTime+=1000;
