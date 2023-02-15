@@ -15,9 +15,9 @@ public class TCPClient {
 
 	public void open() {
 		try {
-			String yiJianJdqIp = LoadProperties.getYiJianJdqIp();
-			int yiJianJdqPort = LoadProperties.getYiJianJdqPort();
-			client=new Socket(yiJianJdqIp,yiJianJdqPort);
+			String jdqIp = LoadProperties.getJdqIp();
+			int jdqPort = LoadProperties.getJdqPort();
+			client=new Socket(jdqIp,jdqPort);
 			t_read= new Thread(new ThreadReadSocket(client));
 			t_read.start();
 			System.out.println("Á¬½Ó");

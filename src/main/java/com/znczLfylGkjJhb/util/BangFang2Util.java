@@ -31,8 +31,7 @@ public class BangFang2Util {
 	            	System.out.println("音柱播报：其他订单状态存在其他订单");
 	        	}
 	        	else {
-	            	System.out.println("开启一检继电器");
-		    		JdqZlUtil.openYiJianJdq();
+		    		JdqZlUtil.openJdq();
 		        	System.out.println("抬起一检上磅道闸");
 		        	JdqBf2Util.openYiJianShangBangDz();
 		        	
@@ -45,7 +44,7 @@ public class BangFang2Util {
 		        	dd.setYjbfh(bfh);
 		        	APIUtil.editDingDan(dd);
 
-		    		YinZhuTask.sendMsg(YzZlUtil.get87().replaceAll(" ", ""), 1500,YinZhuTask.YI_JIAN);
+		    		YinZhuTask.sendMsg(YzZlUtil.get87().replaceAll(" ", ""), 1500);
 		        	
 		    		checkYJSBHWGSState();
 	        	}
@@ -67,16 +66,16 @@ public class BangFang2Util {
 	 */
 	public static void checkYJSBHWGSState() {
 		try {
-			YiJianJdq yjjdq = JdqZlUtil.getYjjdq();
-			System.out.println("前open1==="+yjjdq.isKgl1Open());
+			JiDianQi jdq = JdqZlUtil.getJdq();
+			System.out.println("前open1==="+jdq.isKgl1Open());
 			Integer bfh = LoadProperties.getBangFangHao();
 			int waitTime=0;
 			while (true) {
-				yjjdq.sendData(WriteZhiLingConst.DU_QU_KAI_GUAN_LIANG_ZHUANG_TAI);
+				jdq.sendData(WriteZhiLingConst.DU_QU_KAI_GUAN_LIANG_ZHUANG_TAI);
 				Thread.sleep(1000);
 				waitTime+=1000;
 
-				System.out.println("后open1==="+yjjdq.isKgl1Open());
+				System.out.println("后open1==="+jdq.isKgl1Open());
 				if(waitTime>30*1000) {
 					System.out.println("上磅失败，请重新车牌识别");
 					System.out.println("查找订单状态为一检上磅的订单，将一检上磅状态从待上磅更改为一检排队中");
@@ -87,20 +86,20 @@ public class BangFang2Util {
 					APIUtil.editDingDanByZt(dd);
 					
 					waitTime+=1000;
-		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000,YinZhuTask.YI_JIAN);
+		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
 		    		JdqBf2Util.openYiJianXiaBangDz();
-		        	JdqZlUtil.closeYiJianJdq();
+		        	JdqZlUtil.closeJdq();
 					Thread.sleep(2000);
-		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000,YinZhuTask.YI_JIAN);
+		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
 					break;
 				}
 				else if(waitTime%(5*1000)==0) {
 					waitTime+=1000;
-		    		YinZhuTask.sendMsg(YzZlUtil.get87().replaceAll(" ", ""), 1000,YinZhuTask.YI_JIAN);
+		    		YinZhuTask.sendMsg(YzZlUtil.get87().replaceAll(" ", ""), 1000);
 				}
 				
 				
-				if(yjjdq.isKgl1Open()) {
+				if(jdq.isKgl1Open()) {
 					System.out.println("查找订单状态为一检上磅的订单，将一检上磅状态从待上磅更改为上磅中");
 					DingDan dd=new DingDan();
 					dd.setYjbfh(bfh);
@@ -124,17 +123,17 @@ public class BangFang2Util {
 	 */
 	public static void checkYJSBHXBHWGSState() {
 		try {
-			YiJianJdq yjjdq = JdqZlUtil.getYjjdq();
-			System.out.println("磅和下磅红外光栅状态前open1==="+yjjdq.isKgl1Open());
-			System.out.println("磅和下磅红外光栅状态前open2==="+yjjdq.isKgl2Open());
+			JiDianQi jdq = JdqZlUtil.getJdq();
+			System.out.println("磅和下磅红外光栅状态前open1==="+jdq.isKgl1Open());
+			System.out.println("磅和下磅红外光栅状态前open2==="+jdq.isKgl2Open());
 			Integer bfh = LoadProperties.getBangFangHao();
 			int waitTime=0;
 			while (true) {
-				yjjdq.sendData(WriteZhiLingConst.DU_QU_KAI_GUAN_LIANG_ZHUANG_TAI);
+				jdq.sendData(WriteZhiLingConst.DU_QU_KAI_GUAN_LIANG_ZHUANG_TAI);
 				Thread.sleep(1000);
 				waitTime+=1000;
-				System.out.println("后open1==="+yjjdq.isKgl1Open());
-				System.out.println("后open2==="+yjjdq.isKgl2Open());
+				System.out.println("后open1==="+jdq.isKgl1Open());
+				System.out.println("后open2==="+jdq.isKgl2Open());
 				System.out.println("waitTime==="+waitTime);
 				if(waitTime>30*1000) {
 					System.out.println("称重失败，请重新车牌识别");
@@ -148,19 +147,19 @@ public class BangFang2Util {
 					APIUtil.editDingDanByZt(dd);
 					
 					waitTime+=1000;
-		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000,YinZhuTask.YI_JIAN);
+		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
 		    		JdqBf2Util.openYiJianXiaBangDz();
-		        	JdqZlUtil.closeYiJianJdq();
+		        	JdqZlUtil.closeJdq();
 					Thread.sleep(2000);
-		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000,YinZhuTask.YI_JIAN);
+		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
 					break;
 				}
 				else if(waitTime%(5*1000)==0) {
 					waitTime+=1000;
-		    		YinZhuTask.sendMsg(YzZlUtil.get87().replaceAll(" ", ""), 1000,YinZhuTask.YI_JIAN);
+		    		YinZhuTask.sendMsg(YzZlUtil.get87().replaceAll(" ", ""), 1000);
 				}
 				
-				if(!yjjdq.isKgl1Open()&&!yjjdq.isKgl2Open()) {
+				if(!jdq.isKgl1Open()&&!jdq.isKgl2Open()) {
 					System.out.println("查找订单状态为一检上磅的订单，将一检上磅状态从上磅中更改为待称重");
 					DingDan dd=new DingDan();
 					dd.setYjbfh(bfh);
@@ -200,19 +199,19 @@ public class BangFang2Util {
 				DingDan dd1=(DingDan)net.sf.json.JSONObject.toBean(net.sf.json.JSONObject.fromObject(resultJO.get("dingDan").toString()), DingDan.class);
 				
 				System.out.println("请确保车辆稳定，15秒后开始一检称重");
-	    		YinZhuTask.sendMsg(YzZlUtil.get88().replaceAll(" ", ""), 1500,YinZhuTask.YI_JIAN);
+	    		YinZhuTask.sendMsg(YzZlUtil.get88().replaceAll(" ", ""), 1500);
 				Thread.sleep(6000);
-	    		YinZhuTask.sendMsg(YzZlUtil.get88().replaceAll(" ", ""), 1500,YinZhuTask.YI_JIAN);
+	    		YinZhuTask.sendMsg(YzZlUtil.get88().replaceAll(" ", ""), 1500);
 				Thread.sleep(15000);
-	    		YinZhuTask.sendMsg(YzZlUtil.get97().replaceAll(" ", ""), 1500,YinZhuTask.YI_JIAN);
+	    		YinZhuTask.sendMsg(YzZlUtil.get97().replaceAll(" ", ""), 1500);
 
 	    		//float yjzl=(float)500;
-				float yjzl=(float)DiBangTask3190.getWeight(GuoBangJiLu.RU_CHANG_GUO_BANG);
+				float yjzl=(float)DiBangTask3190.getWeight();
 				
 				if(yjzl>0) {
-					APIUtil.playWeight(yjzl,YinZhuTask.YI_JIAN);
+					APIUtil.playWeight(yjzl);
 					Thread.sleep(2000);
-					APIUtil.playWeight(yjzl,YinZhuTask.YI_JIAN);
+					APIUtil.playWeight(yjzl);
 					Thread.sleep(2000);
 					
 					JSONObject ddJO=resultJO.getJSONObject("dingDan");
@@ -247,7 +246,7 @@ public class BangFang2Util {
 					Thread.sleep(2000);
 					*/
 
-		    		YinZhuTask.sendMsg(YzZlUtil.get89().replaceAll(" ", ""), 1500,YinZhuTask.YI_JIAN);
+		    		YinZhuTask.sendMsg(YzZlUtil.get89().replaceAll(" ", ""), 1500);
 					
 		        	System.out.println("抬起一检下磅道闸");
 		        	JdqBf2Util.openYiJianXiaBangDz();
@@ -264,7 +263,7 @@ public class BangFang2Util {
 					APIUtil.editDingDanByZt(dd);
 					
 		        	//这段代码到现场有了音柱后再打开
-		    		YinZhuTask.sendMsg(YzZlUtil.get87().replaceAll(" ", ""), 1500,YinZhuTask.YI_JIAN);
+		    		YinZhuTask.sendMsg(YzZlUtil.get87().replaceAll(" ", ""), 1500);
 					checkYJSBHWGSState();
 				}
 				else if(yjzl==-1) {//称重失败
@@ -278,20 +277,20 @@ public class BangFang2Util {
 					APIUtil.editDingDanByZt(dd);
 					
 					JdqBf2Util.openYiJianXiaBangDz();
-		        	JdqZlUtil.closeYiJianJdq();
+		        	JdqZlUtil.closeJdq();
 					
-		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1500,YinZhuTask.YI_JIAN);
+		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1500);
 					Thread.sleep(2000);
-		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000,YinZhuTask.YI_JIAN);
+		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
 				}
 			}
 			else {
 				String message = resultJO.getString("message");
 				System.out.println("message==="+message+",语音播报");
 	        	//这段代码到现场有了音柱后再打开
-	    		YinZhuTask.sendMsg(YzZlUtil.get86().replaceAll(" ", ""), 1500,YinZhuTask.YI_JIAN);
+	    		YinZhuTask.sendMsg(YzZlUtil.get86().replaceAll(" ", ""), 1500);
 				Thread.sleep(3000);
-	    		YinZhuTask.sendMsg(YzZlUtil.get86().replaceAll(" ", ""), 1500,YinZhuTask.YI_JIAN);
+	    		YinZhuTask.sendMsg(YzZlUtil.get86().replaceAll(" ", ""), 1500);
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -304,14 +303,14 @@ public class BangFang2Util {
 	 */
 	public static void checkYJXBHWGSState() {
 		try {
-			YiJianJdq yjjdq = JdqZlUtil.getYjjdq();
-			System.out.println("前open1==="+yjjdq.isKgl1Open());
+			JiDianQi jdq = JdqZlUtil.getJdq();
+			System.out.println("前open1==="+jdq.isKgl1Open());
 			Integer bfh = LoadProperties.getBangFangHao();
 			while (true) {
-				yjjdq.sendData(WriteZhiLingConst.DU_QU_KAI_GUAN_LIANG_ZHUANG_TAI);
+				jdq.sendData(WriteZhiLingConst.DU_QU_KAI_GUAN_LIANG_ZHUANG_TAI);
 				Thread.sleep(1000);
-				System.out.println("后open1==="+yjjdq.isKgl1Open());
-				if(yjjdq.isKgl1Open()) {
+				System.out.println("后open1==="+jdq.isKgl1Open());
+				if(jdq.isKgl1Open()) {
 					System.out.println("查找订单状态为一检上磅的订单，将一检上磅状态从待下磅更改为下磅中");
 					DingDan dd=new DingDan();
 					dd.setYjbfh(bfh);
@@ -335,14 +334,14 @@ public class BangFang2Util {
 	 */
 	public static void checkIfYJXBYwc() {
 		try {
-			YiJianJdq yjjdq = JdqZlUtil.getYjjdq();
-			System.out.println("前open1==="+yjjdq.isKgl1Open());
+			JiDianQi jdq = JdqZlUtil.getJdq();
+			System.out.println("前open1==="+jdq.isKgl1Open());
 			Integer bfh = LoadProperties.getBangFangHao();
 			while (true) {
-				yjjdq.sendData(WriteZhiLingConst.DU_QU_KAI_GUAN_LIANG_ZHUANG_TAI);
+				jdq.sendData(WriteZhiLingConst.DU_QU_KAI_GUAN_LIANG_ZHUANG_TAI);
 				Thread.sleep(1000);
-				System.out.println("后open1==="+yjjdq.isKgl1Open());
-				if(!yjjdq.isKgl1Open()) {
+				System.out.println("后open1==="+jdq.isKgl1Open());
+				if(!jdq.isKgl1Open()) {
 					System.out.println("查找订单状态为一检上磅的订单，更改订单状态为二检排队中、一检状态从下磅中更改为已完成");
 					DingDan dd=new DingDan();
 					dd.setYjbfh(bfh);
@@ -352,8 +351,7 @@ public class BangFang2Util {
 			    	dd.setXyjzt(DingDan.YI_WAN_CHENG);
 			    	APIUtil.editDingDanByZt(dd);
 			    	
-	            	System.out.println("关闭一检继电器");
-		    		JdqZlUtil.closeYiJianJdq();
+		    		JdqZlUtil.closeJdq();
 					break;
 				}
 			}
@@ -380,8 +378,7 @@ public class BangFang2Util {
 	            	System.out.println("音柱播报：其他订单状态存在其他订单");
 	        	}
 	        	else {
-	            	System.out.println("开启二检继电器");
-		    		JdqZlUtil.openErJianJdq();
+		    		JdqZlUtil.openJdq();
 		        	System.out.println("抬起二检上磅道闸");
 		        	JdqBf2Util.openErJianShangBangDz();
 		        	
@@ -394,7 +391,7 @@ public class BangFang2Util {
 		        	dd.setEjbfh(bfh);
 		        	APIUtil.editDingDan(dd);
 
-		    		YinZhuTask.sendMsg(YzZlUtil.get87().replaceAll(" ", ""), 1500,YinZhuTask.ER_JIAN);
+		    		YinZhuTask.sendMsg(YzZlUtil.get87().replaceAll(" ", ""), 1500);
 		        	
 		    		checkEJSBHWGSState();
 	        	}
@@ -402,9 +399,9 @@ public class BangFang2Util {
 	        else {
 	        	System.out.println("message==="+resultJO.getString("message"));
 	        	System.out.println("音柱播报：没有找到匹配订单");
-	    		YinZhuTask.sendMsg(YzZlUtil.get86().replaceAll(" ", ""), 1500,YinZhuTask.ER_JIAN);
+	    		YinZhuTask.sendMsg(YzZlUtil.get86().replaceAll(" ", ""), 1500);
 	    		Thread.sleep(3000);
-	    		YinZhuTask.sendMsg(YzZlUtil.get86().replaceAll(" ", ""), 1500,YinZhuTask.ER_JIAN);
+	    		YinZhuTask.sendMsg(YzZlUtil.get86().replaceAll(" ", ""), 1500);
 	        }
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -417,16 +414,16 @@ public class BangFang2Util {
 	 */
 	public static void checkEJSBHWGSState() {
 		try {
-			ErJianJdq ejjdq = JdqZlUtil.getEjjdq();
-			System.out.println("前open1==="+ejjdq.isKgl1Open());
+			JiDianQi jdq = JdqZlUtil.getJdq();
+			System.out.println("前open1==="+jdq.isKgl1Open());
 			Integer bfh = LoadProperties.getBangFangHao();
 			int waitTime=0;
 			while (true) {
-				ejjdq.sendData(WriteZhiLingConst.DU_QU_KAI_GUAN_LIANG_ZHUANG_TAI);
+				jdq.sendData(WriteZhiLingConst.DU_QU_KAI_GUAN_LIANG_ZHUANG_TAI);
 				Thread.sleep(1000);
 				waitTime+=1000;
 				
-				System.out.println("后open1==="+ejjdq.isKgl1Open());
+				System.out.println("后open1==="+jdq.isKgl1Open());
 				if(waitTime>30*1000) {
 					System.out.println("上磅失败，请重新车牌识别");
 					System.out.println("查找订单状态为二检上磅的订单，将二检上磅状态从待上磅更改为二检排队中");
@@ -437,19 +434,19 @@ public class BangFang2Util {
 					APIUtil.editDingDanByZt(dd);
 					
 					waitTime+=1000;
-		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000,YinZhuTask.ER_JIAN);
+		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
 		    		JdqBf2Util.openErJianXiaBangDz();
-		        	JdqZlUtil.closeErJianJdq();
+		        	JdqZlUtil.closeJdq();
 					Thread.sleep(2000);
-		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000,YinZhuTask.ER_JIAN);
+		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
 					break;
 				}
 				else if(waitTime%(5*1000)==0) {
 					waitTime+=1000;
-		    		YinZhuTask.sendMsg(YzZlUtil.get87().replaceAll(" ", ""), 1000,YinZhuTask.ER_JIAN);
+		    		YinZhuTask.sendMsg(YzZlUtil.get87().replaceAll(" ", ""), 1000);
 				}
 				
-				if(ejjdq.isKgl1Open()) {
+				if(jdq.isKgl1Open()) {
 					System.out.println("查找订单状态为二检上磅的订单，将二检上磅状态从待上磅更改为上磅中");
 					DingDan dd=new DingDan();
 					dd.setEjbfh(bfh);
@@ -474,17 +471,17 @@ public class BangFang2Util {
 	 */
 	public static void checkEJSBHXBHWGSState() {
 		try {
-			ErJianJdq ejjdq = JdqZlUtil.getEjjdq();
-			System.out.println("前open1==="+ejjdq.isKgl1Open());
-			System.out.println("前open2==="+ejjdq.isKgl2Open());
+			JiDianQi jdq = JdqZlUtil.getJdq();
+			System.out.println("前open1==="+jdq.isKgl1Open());
+			System.out.println("前open2==="+jdq.isKgl2Open());
 			Integer bfh = LoadProperties.getBangFangHao();
 			int waitTime=0;
 			while (true) {
-				ejjdq.sendData(WriteZhiLingConst.DU_QU_KAI_GUAN_LIANG_ZHUANG_TAI);
+				jdq.sendData(WriteZhiLingConst.DU_QU_KAI_GUAN_LIANG_ZHUANG_TAI);
 				Thread.sleep(1000);
 				waitTime+=1000;
-				System.out.println("后open1==="+ejjdq.isKgl1Open());
-				System.out.println("后open2==="+ejjdq.isKgl2Open());
+				System.out.println("后open1==="+jdq.isKgl1Open());
+				System.out.println("后open2==="+jdq.isKgl2Open());
 				System.out.println("waitTime==="+waitTime);
 				if(waitTime>30*1000) {
 					System.out.println("称重失败，请重新车牌识别");
@@ -498,19 +495,19 @@ public class BangFang2Util {
 					APIUtil.editDingDanByZt(dd);
 					
 					waitTime+=1000;
-		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000,YinZhuTask.ER_JIAN);
+		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
 		    		JdqBf2Util.openYiJianXiaBangDz();
-		        	JdqZlUtil.closeYiJianJdq();
+		        	JdqZlUtil.closeJdq();
 					Thread.sleep(2000);
-		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000,YinZhuTask.ER_JIAN);
+		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
 					break;
 				}
 				else if(waitTime%(5*1000)==0) {
 					waitTime+=1000;
-		    		YinZhuTask.sendMsg(YzZlUtil.get87().replaceAll(" ", ""), 1000,YinZhuTask.ER_JIAN);
+		    		YinZhuTask.sendMsg(YzZlUtil.get87().replaceAll(" ", ""), 1000);
 				}
 				
-				if(!ejjdq.isKgl1Open()&&!ejjdq.isKgl2Open()) {
+				if(!jdq.isKgl1Open()&&!jdq.isKgl2Open()) {
 					System.out.println("查找订单状态为二检上磅的订单，将二检上磅状态从上磅中更改为待称重");
 					DingDan dd=new DingDan();
 					dd.setEjbfh(bfh);
@@ -550,11 +547,11 @@ public class BangFang2Util {
 				DingDan dd1=(DingDan)net.sf.json.JSONObject.toBean(net.sf.json.JSONObject.fromObject(resultJO.get("dingDan").toString()), DingDan.class);
 	
 				System.out.println("请确保车辆稳定，15秒后开始二检称重");
-				YinZhuTask.sendMsg(YzZlUtil.get88().replaceAll(" ", ""), 1500,YinZhuTask.ER_JIAN);
+				YinZhuTask.sendMsg(YzZlUtil.get88().replaceAll(" ", ""), 1500);
 				Thread.sleep(6000);
-				YinZhuTask.sendMsg(YzZlUtil.get88().replaceAll(" ", ""), 1500,YinZhuTask.ER_JIAN);
+				YinZhuTask.sendMsg(YzZlUtil.get88().replaceAll(" ", ""), 1500);
 				Thread.sleep(15000);
-	    		YinZhuTask.sendMsg(YzZlUtil.get97().replaceAll(" ", ""), 1500,YinZhuTask.ER_JIAN);
+	    		YinZhuTask.sendMsg(YzZlUtil.get97().replaceAll(" ", ""), 1500);
 
 				Float yjzl=null;
 				float ejzl=0;
@@ -567,7 +564,7 @@ public class BangFang2Util {
 				int bdId = bdJO.getInt("id");
 				yjzl=(float)bdJO.getDouble("yjzl");
 				//ejzl=300;
-				ejzl=(float)DiBangTask3190.getWeight(GuoBangJiLu.CHU_CHANG_GUO_BANG);
+				ejzl=(float)DiBangTask3190.getWeight();
 
 				if(yjzl>ejzl) {
 					lxlx=DingDan.SONG_YUN;
@@ -589,9 +586,9 @@ public class BangFang2Util {
 				jz=mz-pz;
 				
 				if(ejzl>0) {
-					APIUtil.playWeight(ejzl,YinZhuTask.ER_JIAN);
+					APIUtil.playWeight(ejzl);
 					Thread.sleep(2000);
-					APIUtil.playWeight(ejzl,YinZhuTask.ER_JIAN);
+					APIUtil.playWeight(ejzl);
 					Thread.sleep(2000);
 					
 					System.out.println("根据称重出来的重量，修改订单对应的磅单记录");
@@ -621,11 +618,11 @@ public class BangFang2Util {
 					//打印磅单记录
 					APIUtil.printBdjl();
 					
-		    		YinZhuTask.sendMsg(YzZlUtil.get99().replaceAll(" ", ""), 1500,YinZhuTask.ER_JIAN);
+		    		YinZhuTask.sendMsg(YzZlUtil.get99().replaceAll(" ", ""), 1500);
 					Thread.sleep(2000);
-		    		YinZhuTask.sendMsg(YzZlUtil.get99().replaceAll(" ", ""), 1500,YinZhuTask.ER_JIAN);
+		    		YinZhuTask.sendMsg(YzZlUtil.get99().replaceAll(" ", ""), 1500);
 					Thread.sleep(2000);
-		    		YinZhuTask.sendMsg(YzZlUtil.get89().replaceAll(" ", ""), 1500,YinZhuTask.ER_JIAN);
+		    		YinZhuTask.sendMsg(YzZlUtil.get89().replaceAll(" ", ""), 1500);
 					
 		        	System.out.println("抬起二检下磅道闸");
 		        	JdqBf2Util.openErJianXiaBangDz();
@@ -642,7 +639,7 @@ public class BangFang2Util {
 					APIUtil.editDingDanByZt(dd);
 
 		        	//这段代码到现场有了音柱后再打开
-		    		YinZhuTask.sendMsg(YzZlUtil.get87().replaceAll(" ", ""), 1500,YinZhuTask.ER_JIAN);
+		    		YinZhuTask.sendMsg(YzZlUtil.get87().replaceAll(" ", ""), 1500);
 					checkEJSBHWGSState();
 				}
 				else if(ejzl==-1) {//称重失败
@@ -656,20 +653,20 @@ public class BangFang2Util {
 					APIUtil.editDingDanByZt(dd);
 					
 					JdqBf2Util.openErJianXiaBangDz();
-		        	JdqZlUtil.closeErJianJdq();
+		        	JdqZlUtil.closeJdq();
 					
-		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1500,YinZhuTask.ER_JIAN);
+		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1500);
 					Thread.sleep(2000);
-		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000,YinZhuTask.ER_JIAN);
+		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
 				}
 			}
 			else {
 				String message = resultJO.getString("message");
 				System.out.println("message==="+message+",语音播报");
 	        	//这段代码到现场有了音柱后再打开
-	    		YinZhuTask.sendMsg(YzZlUtil.get86().replaceAll(" ", ""), 1500,YinZhuTask.ER_JIAN);
+	    		YinZhuTask.sendMsg(YzZlUtil.get86().replaceAll(" ", ""), 1500);
 				Thread.sleep(3000);
-	    		YinZhuTask.sendMsg(YzZlUtil.get86().replaceAll(" ", ""), 1500,YinZhuTask.ER_JIAN);
+	    		YinZhuTask.sendMsg(YzZlUtil.get86().replaceAll(" ", ""), 1500);
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -682,14 +679,14 @@ public class BangFang2Util {
 	 */
 	public static void checkEJXBHWGSState() {
 		try {
-			ErJianJdq ejjdq = JdqZlUtil.getEjjdq();
-			System.out.println("前open1==="+ejjdq.isKgl1Open());
+			JiDianQi jdq = JdqZlUtil.getJdq();
+			System.out.println("前open1==="+jdq.isKgl1Open());
 			Integer bfh = LoadProperties.getBangFangHao();
 			while (true) {
-				ejjdq.sendData(WriteZhiLingConst.DU_QU_KAI_GUAN_LIANG_ZHUANG_TAI);
+				jdq.sendData(WriteZhiLingConst.DU_QU_KAI_GUAN_LIANG_ZHUANG_TAI);
 				Thread.sleep(1000);
-				System.out.println("后open1==="+ejjdq.isKgl1Open());
-				if(ejjdq.isKgl1Open()) {
+				System.out.println("后open1==="+jdq.isKgl1Open());
+				if(jdq.isKgl1Open()) {
 		        	
 					System.out.println("查找订单状态为二检上磅的订单，将二检上磅状态从待下磅更改为下磅中");
 					DingDan dd=new DingDan();
@@ -714,14 +711,14 @@ public class BangFang2Util {
 	 */
 	public static void checkIfEJXBYwc() {
 		try {
-			ErJianJdq ejjdq = JdqZlUtil.getEjjdq();
-			System.out.println("前open1=="+ejjdq.isKgl1Open());
+			JiDianQi jdq = JdqZlUtil.getJdq();
+			System.out.println("前open1=="+jdq.isKgl1Open());
 			Integer bfh = LoadProperties.getBangFangHao();
 			while (true) {
-				ejjdq.sendData(WriteZhiLingConst.DU_QU_KAI_GUAN_LIANG_ZHUANG_TAI);
+				jdq.sendData(WriteZhiLingConst.DU_QU_KAI_GUAN_LIANG_ZHUANG_TAI);
 				Thread.sleep(1000);
-				System.out.println("后open1==="+ejjdq.isKgl1Open());
-				if(!ejjdq.isKgl1Open()) {
+				System.out.println("后open1==="+jdq.isKgl1Open());
+				if(!jdq.isKgl1Open()) {
 					String cph=null;
 					JSONObject cphResultJO=APIUtil.getCphByBfhDdzt(bfh,DingDanZhuangTai.ER_JIAN_SHANG_BANG_TEXT);
 					String cphStatus = cphResultJO.getString("status");
@@ -741,8 +738,7 @@ public class BangFang2Util {
 						APIUtil.updateCheLiangWcddcsByCph(cph);
 					}
 			    	
-	            	System.out.println("关闭二检继电器");
-		    		JdqZlUtil.closeErJianJdq();
+		    		JdqZlUtil.closeJdq();
 					break;
 				}
 			}

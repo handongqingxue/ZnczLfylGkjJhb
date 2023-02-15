@@ -480,8 +480,8 @@ public class APIUtil {
 		}
 	}
 	
-	public static void playWeight(float djczl, int jyFlag) {
-		YinZhuTask.sendMsg(YzZlUtil.get98().replaceAll(" ", ""), 1500,jyFlag);
+	public static void playWeight(float djczl) {
+		YinZhuTask.sendMsg(YzZlUtil.get98().replaceAll(" ", ""), 1500);
 		String djczlStr = String.valueOf((int)djczl);
 		System.out.println("djczlStr==="+djczlStr);
 		for (int i = 0; i < djczlStr.length(); i++) {
@@ -494,7 +494,7 @@ public class APIUtil {
 			if(chi==0)
 				chi=36;
 			System.out.println("chi==="+chi);
-    		YinZhuTask.sendMsg(YzZlUtil.getByDuanHao(chi).replaceAll(" ", ""), 800,jyFlag);
+    		YinZhuTask.sendMsg(YzZlUtil.getByDuanHao(chi).replaceAll(" ", ""), 800);
 		}
 	}
 	

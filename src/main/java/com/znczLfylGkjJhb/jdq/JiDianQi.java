@@ -8,7 +8,7 @@ import java.net.UnknownHostException;
 import com.znczLfylGkjJhb.util.LoadProperties;
 import com.znczLfylGkjJhb.util.StringUtil;
 
-public class YiJianJdq {
+public class JiDianQi {
 
     private Socket client;
     private Thread t_read; 
@@ -33,10 +33,14 @@ public class YiJianJdq {
 
 	public void open() {
 		try {
-			String yiJianJdqIp = LoadProperties.getYiJianJdqIp();
-			int yiJianJdqPort = LoadProperties.getYiJianJdqPort();
-			client=new Socket(yiJianJdqIp,yiJianJdqPort);
-			t_read= new Thread(new ReadYiJianJdqSocket(client,YiJianJdq.this));
+			System.out.println("client==="+client);
+			if(client!=null)
+				System.out.println("client.isClosed==="+client.isClosed());
+			
+			String jdqIp = LoadProperties.getJdqIp();
+			int jdqPort = LoadProperties.getJdqPort();
+			client=new Socket(jdqIp,jdqPort);
+			t_read= new Thread(new ReadJdqSocket(client,JiDianQi.this));
 			t_read.start();
 			System.out.println("连接一检继电器");
 		} catch (UnknownHostException e) {

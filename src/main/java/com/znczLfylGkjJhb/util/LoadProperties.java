@@ -353,37 +353,18 @@ public class LoadProperties {
 	}
 
 	/**
-	 * 一检音柱串口配置
+	 * 音柱串口配置
 	 * 
 	 * @return
 	 */
-	public static String getYiJianYinZhuCom() {
+	public static String getYinZhuCom() {
 		if (prop == null) {
 			prop = Method2();
 		}
 
-		String trim = prop.getProperty("yiJianYinZhuCom").trim();
+		String trim = prop.getProperty("yinZhuCom").trim();
 		if (StringUtils.isBlank(trim)) {
-			logger.debug("请在配置文件中配置yiJianYinZhuCom");
-			return null;
-		}
-
-		return trim;
-	}
-
-	/**
-	 * 二检音柱串口配置
-	 * 
-	 * @return
-	 */
-	public static String getErJianYinZhuCom() {
-		if (prop == null) {
-			prop = Method2();
-		}
-
-		String trim = prop.getProperty("erJianYinZhuCom").trim();
-		if (StringUtils.isBlank(trim)) {
-			logger.debug("请在配置文件中配置erJianYinZhuCom");
+			logger.debug("请在配置文件中配置yinZhuCom");
 			return null;
 		}
 
@@ -529,32 +510,32 @@ public class LoadProperties {
 	}
 	
 	/**
-	 * 获得一检继电器ip
+	 * 获得继电器ip
 	 * @return
 	 */
-	public static String getYiJianJdqIp() {
+	public static String getJdqIp() {
 		if (prop == null) {
 			prop = Method2();
 		}
-		String trim = prop.getProperty("yiJianJdqIp").trim();
+		String trim = prop.getProperty("jdqIp").trim();
 		if (StringUtils.isBlank(trim)) {
-			logger.debug("请在配置文件中配置yiJianJdqIp");
+			logger.debug("请在配置文件中配置jdqIp");
 			return null;
 		}
 		return trim;
 	}
 	
 	/**
-	 * 获得一检继电器端口号
+	 * 获得继电器端口号
 	 * @return
 	 */
-	public static Integer getYiJianJdqPort() {
+	public static Integer getJdqPort() {
 		if (prop == null) {
 			prop = Method2();
 		}
-		String trim = prop.getProperty("yiJianJdqPort").trim();
+		String trim = prop.getProperty("jdqPort").trim();
 		if (StringUtils.isBlank(trim)) {
-			logger.debug("请在配置文件中配置yiJianJdqPort");
+			logger.debug("请在配置文件中配置jdqPort");
 			return null;
 		}
 		
@@ -564,16 +545,16 @@ public class LoadProperties {
 	}
 
 	/**
-	 * 获得一检继电器脉冲
+	 * 获得继电器脉冲
 	 * @return
 	 */
-	public static Integer getYiJianJdqMaiChong() {
+	public static Integer getJdqMaiChong() {
 		if (prop == null) {
 			prop = Method2();
 		}
-		String trim = prop.getProperty("yiJianJdqMaiChong").trim();
+		String trim = prop.getProperty("jdqMaiChong").trim();
 		if (StringUtils.isBlank(trim)) {
-			logger.debug("请在配置文件中配置yiJianJdqMaiChong");
+			logger.debug("请在配置文件中配置jdqMaiChong");
 			return null;
 		}
 		
@@ -582,60 +563,6 @@ public class LoadProperties {
 		return parseInt;
 	}
 	
-	/**
-	 * 获得二检继电器ip
-	 * @return
-	 */
-	public static String getErJianJdqIp() {
-		if (prop == null) {
-			prop = Method2();
-		}
-		String trim = prop.getProperty("erJianJdqIp").trim();
-		if (StringUtils.isBlank(trim)) {
-			logger.debug("请在配置文件中配置erJianJdqIp");
-			return null;
-		}
-		return trim;
-	}
-	
-	/**
-	 * 获得二检继电器端口号
-	 * @return
-	 */
-	public static Integer getErJianJdqPort() {
-		if (prop == null) {
-			prop = Method2();
-		}
-		String trim = prop.getProperty("erJianJdqPort").trim();
-		if (StringUtils.isBlank(trim)) {
-			logger.debug("请在配置文件中配置erJianJdqPort");
-			return null;
-		}
-		
-		int parseInt = Integer.parseInt(trim);
-		
-		return parseInt;
-	}
-
-	/**
-	 * 获得二检继电器脉冲
-	 * @return
-	 */
-	public static Integer getErJianJdqMaiChong() {
-		if (prop == null) {
-			prop = Method2();
-		}
-		String trim = prop.getProperty("erJianJdqMaiChong").trim();
-		if (StringUtils.isBlank(trim)) {
-			logger.debug("请在配置文件中配置erJianJdqMaiChong");
-			return null;
-		}
-		
-		int parseInt = Integer.parseInt(trim);
-		
-		return parseInt;
-	}
-
 	/**
 	 * 获得服务器ip
 	 * @return

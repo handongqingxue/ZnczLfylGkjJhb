@@ -47,7 +47,7 @@ public class GiftTool {
 			//GiftTool.run(ByteUtil.hex2byte(YzZlUtil.getByDuanHao(86).replaceAll(" ", "")));
 			//GiftTool.run(ByteUtil.hex2byte(ZhiLingUtil.getByDuanHao(81).replaceAll(" ", "")));
 
-    		YinZhuTask.sendMsg(YzZlUtil.get88().replaceAll(" ", ""), 1500,YinZhuTask.YI_JIAN);
+    		YinZhuTask.sendMsg(YzZlUtil.get88().replaceAll(" ", ""), 1500);
     		//YinZhuTask.sendMsg(YzZlUtil.getByDuanHao(1).replaceAll(" ", ""), 1500,YinZhuTask.YI_JIAN);
 			/*
 			while (true) {

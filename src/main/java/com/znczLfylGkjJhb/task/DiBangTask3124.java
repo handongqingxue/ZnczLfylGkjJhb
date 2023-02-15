@@ -12,7 +12,7 @@ import gnu.io.SerialPort;
 
 public class DiBangTask3124 {
 
-	public static int getWeight(int jyFlag) throws InterruptedException {
+	public static int getWeight() throws InterruptedException {
         SerialPort serialPortTest = null;
         byte[] bytes = null;
         int preWeight=0;
@@ -74,22 +74,13 @@ public class DiBangTask3124 {
 						
 						boolean kgl1Open=false;
 						boolean kgl2Open=false;
-						if(jyFlag==GuoBangJiLu.RU_CHANG_GUO_BANG) {
-							YiJianJdq yjjdq = JdqZlUtil.getYjjdq();
-							yjjdq.sendData(WriteZhiLingConst.DU_QU_KAI_GUAN_LIANG_ZHUANG_TAI);
-							kgl1Open=yjjdq.isKgl1Open();
-							kgl2Open=yjjdq.isKgl2Open();
-							System.out.println("称重中open1==="+kgl1Open);
-							System.out.println("称重中open2==="+kgl2Open);
-						}
-						else if(jyFlag==GuoBangJiLu.CHU_CHANG_GUO_BANG) {
-							ErJianJdq ejjdq = JdqZlUtil.getEjjdq();
-							ejjdq.sendData(WriteZhiLingConst.DU_QU_KAI_GUAN_LIANG_ZHUANG_TAI);
-							kgl1Open=ejjdq.isKgl1Open();
-							kgl2Open=ejjdq.isKgl2Open();
-							System.out.println("称重中open1==="+kgl1Open);
-							System.out.println("称重中open2==="+kgl2Open);
-						}
+						
+						JiDianQi jdq = JdqZlUtil.getJdq();
+						jdq.sendData(WriteZhiLingConst.DU_QU_KAI_GUAN_LIANG_ZHUANG_TAI);
+						kgl1Open=jdq.isKgl1Open();
+						kgl2Open=jdq.isKgl2Open();
+						System.out.println("称重中open1==="+kgl1Open);
+						System.out.println("称重中open2==="+kgl2Open);
 
 						if(kgl1Open||kgl2Open) {
 							System.out.println("光栅被遮挡");
@@ -125,7 +116,7 @@ public class DiBangTask3124 {
 	
 	public static void main(String[] args) {
 		try {
-			getWeight(GuoBangJiLu.RU_CHANG_GUO_BANG);
+			getWeight();
     		//YinZhuTask.sendMsg(YzZlUtil.get88().replaceAll(" ", ""), 1500,YinZhuTask.YI_JIAN);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

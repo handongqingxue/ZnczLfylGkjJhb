@@ -10,16 +10,16 @@ import java.util.Arrays;
 
 import com.znczLfylGkjJhb.util.StringUtil;
 
-public class ReadYiJianJdqSocket implements Runnable {
+public class ReadJdqSocket implements Runnable {
 
 	private Socket client;
-	YiJianJdq yiJianJdq;
+	JiDianQi jdq;
 	private int BUFFER_SIZE = 50;
 	
-	public ReadYiJianJdqSocket(Socket socket, YiJianJdq yiJianJdq) {
+	public ReadJdqSocket(Socket socket, JiDianQi jdq) {
 		// TODO Auto-generated constructor stub
 		client = socket;
-		this.yiJianJdq=yiJianJdq;
+		this.jdq=jdq;
 	}
 
 	@Override
@@ -65,22 +65,22 @@ public class ReadYiJianJdqSocket implements Runnable {
 						    	char state1 = tb.charAt(kglNum1-1);
 					            if(state1=='1'){
 					                System.out.println("开关量1:已导通"); 
-					                yiJianJdq.setKgl1Open(true);
+					                jdq.setKgl1Open(true);
 					            }
 					            else { 
 					            	System.out.println("开关量1:已断开"); 
-									yiJianJdq.setKgl1Open(false);
+									jdq.setKgl1Open(false);
 					            }
 					            
 						    	int kglNum2=2;
 						    	char state2 = tb.charAt(kglNum2-1);
 					            if(state2=='1'){
 					                System.out.println("开关量2:已导通");
-					                yiJianJdq.setKgl2Open(true);
+					                jdq.setKgl2Open(true);
 					            }
 					            else { 
 					                System.out.println("开关量2:已断开");
-						            yiJianJdq.setKgl2Open(false);
+						            jdq.setKgl2Open(false);
 					            }
 							}
 						}
