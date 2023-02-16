@@ -121,6 +121,11 @@ public class DiBangTask3190 {
         return weight;
     }
 
+    /**
+     * 这个方法在车辆上磅称重时，若光栅前方被挡时调用，判断地磅上有无车辆。若不判断，就算称重失败还原到上磅状态，也会形成死循环
+     * @return
+     * @throws InterruptedException
+     */
     public static int getTestWeight() throws InterruptedException {
         SerialPort serialPortTest = null;
         byte[] bytes = null;

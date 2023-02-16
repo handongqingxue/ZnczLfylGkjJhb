@@ -32,8 +32,7 @@ public class BangFang2Util {
 	        	}
 	        	else {
 		    		JdqZlUtil.openJdq();
-		        	System.out.println("抬起一检上磅道闸");
-		        	JdqBf2Util.openYiJianShangBangDz();
+		        	JdqBf2Util.openShangBangDz();
 		        	
 		        	System.out.println("改变订单状态为一检上磅");
 					JSONObject ddJO=resultJO.getJSONObject("dingDan");
@@ -87,7 +86,7 @@ public class BangFang2Util {
 					
 					waitTime+=1000;
 		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
-		    		JdqBf2Util.openYiJianXiaBangDz();
+		    		JdqBf2Util.openXiaBangDz();
 		        	JdqZlUtil.closeJdq();
 					Thread.sleep(2000);
 		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
@@ -136,6 +135,8 @@ public class BangFang2Util {
 				System.out.println("后open2==="+jdq.isKgl2Open());
 				System.out.println("waitTime==="+waitTime);
 				if(waitTime>30*1000) {
+					//
+					//若光栅被遮挡超过30s，可能车辆已经上磅，但车头或车尾依然未离开光栅区域。这种情况需先获取下地磅上的车辆重量，判断有无车辆，有的话进入称重环节，没的话则还原到上一步
 					int weight = DiBangTask3190.getTestWeight();
 					if(weight>0) {
 						System.out.println("查找订单状态为一检上磅的订单，将一检上磅状态从上磅中更改为待称重");
@@ -150,6 +151,7 @@ public class BangFang2Util {
 						break;
 					}
 					else {
+					//
 						System.out.println("称重失败，请重新车牌识别");
 						System.out.println("查找订单状态为一检上磅的订单，将一检上磅状态从待上磅更改为一检排队中");
 						DingDan dd=new DingDan();
@@ -162,12 +164,14 @@ public class BangFang2Util {
 						
 						waitTime+=1000;
 			    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
-			    		JdqBf2Util.openYiJianXiaBangDz();
+			    		JdqBf2Util.openXiaBangDz();
 			        	JdqZlUtil.closeJdq();
 						Thread.sleep(2000);
 			    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
 						break;
+					//
 					}
+					//
 				}
 				else if(waitTime%(5*1000)==0) {
 					waitTime+=1000;
@@ -263,8 +267,7 @@ public class BangFang2Util {
 
 		    		YinZhuTask.sendMsg(YzZlUtil.get89().replaceAll(" ", ""), 1500);
 					
-		        	System.out.println("抬起一检下磅道闸");
-		        	JdqBf2Util.openYiJianXiaBangDz();
+		        	JdqBf2Util.openXiaBangDz();
 					
 					checkYJXBHWGSState();
 				}
@@ -291,7 +294,7 @@ public class BangFang2Util {
 					dd.setXyjzt(DingDan.DAI_SHANG_BANG);
 					APIUtil.editDingDanByZt(dd);
 					
-					JdqBf2Util.openYiJianXiaBangDz();
+					JdqBf2Util.openXiaBangDz();
 		        	JdqZlUtil.closeJdq();
 					
 		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1500);
@@ -394,8 +397,7 @@ public class BangFang2Util {
 	        	}
 	        	else {
 		    		JdqZlUtil.openJdq();
-		        	System.out.println("抬起二检上磅道闸");
-		        	JdqBf2Util.openErJianShangBangDz();
+		        	JdqBf2Util.openShangBangDz();
 		        	
 		        	System.out.println("改变订单状态为二检上磅");
 					JSONObject ddJO=resultJO.getJSONObject("dingDan");
@@ -450,7 +452,7 @@ public class BangFang2Util {
 					
 					waitTime+=1000;
 		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
-		    		JdqBf2Util.openErJianXiaBangDz();
+		    		JdqBf2Util.openXiaBangDz();
 		        	JdqZlUtil.closeJdq();
 					Thread.sleep(2000);
 		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
@@ -499,6 +501,8 @@ public class BangFang2Util {
 				System.out.println("后open2==="+jdq.isKgl2Open());
 				System.out.println("waitTime==="+waitTime);
 				if(waitTime>30*1000) {
+					//
+					//若光栅被遮挡超过30s，可能车辆已经上磅，但车头或车尾依然未离开光栅区域。这种情况需先获取下地磅上的车辆重量，判断有无车辆，有的话进入称重环节，没的话则还原到上一步
 					int weight = DiBangTask3190.getTestWeight();
 					if(weight>0) {
 						System.out.println("查找订单状态为二检上磅的订单，将二检上磅状态从上磅中更改为待称重");
@@ -513,6 +517,7 @@ public class BangFang2Util {
 						break;
 					}
 					else {
+					//
 						System.out.println("称重失败，请重新车牌识别");
 						System.out.println("查找订单状态为二检上磅的订单，将二检上磅状态从待上磅更改为二检排队中");
 						DingDan dd=new DingDan();
@@ -525,12 +530,14 @@ public class BangFang2Util {
 						
 						waitTime+=1000;
 			    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
-			    		JdqBf2Util.openYiJianXiaBangDz();
+			    		JdqBf2Util.openXiaBangDz();
 			        	JdqZlUtil.closeJdq();
 						Thread.sleep(2000);
 			    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
 						break;
+					//
 					}
+					//
 				}
 				else if(waitTime%(5*1000)==0) {
 					waitTime+=1000;
@@ -654,8 +661,7 @@ public class BangFang2Util {
 					Thread.sleep(2000);
 		    		YinZhuTask.sendMsg(YzZlUtil.get89().replaceAll(" ", ""), 1500);
 					
-		        	System.out.println("抬起二检下磅道闸");
-		        	JdqBf2Util.openErJianXiaBangDz();
+		        	JdqBf2Util.openXiaBangDz();
 					
 					checkEJXBHWGSState();
 				}
@@ -682,7 +688,7 @@ public class BangFang2Util {
 					dd.setXejzt(DingDan.DAI_SHANG_BANG);
 					APIUtil.editDingDanByZt(dd);
 					
-					JdqBf2Util.openErJianXiaBangDz();
+					JdqBf2Util.openXiaBangDz();
 		        	JdqZlUtil.closeJdq();
 					
 		    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1500);
@@ -741,6 +747,9 @@ public class BangFang2Util {
 	 */
 	public static void checkIfEJXBYwc() {
 		try {
+			////
+	        int waitTime=0;
+	        ////
 			JiDianQi jdq = JdqZlUtil.getJdq();
 			System.out.println("前open1=="+jdq.isKgl1Open());
 			Integer bfh = LoadProperties.getBangFangHao();
@@ -748,7 +757,16 @@ public class BangFang2Util {
 				jdq.sendData(WriteZhiLingConst.DU_QU_KAI_GUAN_LIANG_ZHUANG_TAI);
 				Thread.sleep(1000);
 				System.out.println("后open1==="+jdq.isKgl1Open());
-				if(!jdq.isKgl1Open()) {
+				
+				////
+				if(jdq.isKgl1Open()) {//要是车辆称重完成一直未下磅，则计算滞留时间
+					waitTime++;
+					System.out.println("waitTime==="+waitTime);
+				}
+				////
+				
+				//if(!jdq.isKgl1Open()) {
+				if(!jdq.isKgl1Open()||waitTime>10) {//滞留时间超过10s，订单状态自动变为已完成
 					String cph=null;
 					JSONObject cphResultJO=APIUtil.getCphByBfhDdzt(bfh,DingDanZhuangTai.ER_JIAN_SHANG_BANG_TEXT);
 					String cphStatus = cphResultJO.getString("status");
