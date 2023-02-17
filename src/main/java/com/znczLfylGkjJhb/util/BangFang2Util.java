@@ -352,6 +352,9 @@ public class BangFang2Util {
 	 */
 	public static void checkIfYJXBYwc() {
 		try {
+			////
+	        int waitTime=0;
+	        ////
 			JiDianQi jdq = JdqZlUtil.getJdq();
 			System.out.println("前open1==="+jdq.isKgl1Open());
 			Integer bfh = LoadProperties.getBangFangHao();
@@ -359,7 +362,16 @@ public class BangFang2Util {
 				jdq.sendData(WriteZhiLingConst.DU_QU_KAI_GUAN_LIANG_ZHUANG_TAI);
 				Thread.sleep(1000);
 				System.out.println("后open1==="+jdq.isKgl1Open());
-				if(!jdq.isKgl1Open()) {
+				
+				////
+				if(jdq.isKgl1Open()) {//要是车辆称重完成一直未下磅，则计算滞留时间
+					waitTime++;
+					System.out.println("waitTime==="+waitTime);
+				}
+				////
+				
+				//if(!jdq.isKgl1Open()) {
+				if(!jdq.isKgl1Open()||waitTime>10) {//滞留时间超过10s，订单状态自动变为已完成
 					System.out.println("查找订单状态为一检上磅的订单，更改订单状态为二检排队中、一检状态从下磅中更改为已完成");
 					DingDan dd=new DingDan();
 					dd.setYjbfh(bfh);

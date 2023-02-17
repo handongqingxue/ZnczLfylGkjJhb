@@ -34,15 +34,17 @@ public class JiDianQi {
 	public void open() {
 		try {
 			System.out.println("client==="+client);
-			if(client!=null)
+			if(client!=null) {
 				System.out.println("client.isClosed==="+client.isClosed());
-			
+				if(!client.isClosed())//在继电器未关闭情况下需要先关闭再连接
+					client.close();
+			}
 			String jdqIp = LoadProperties.getJdqIp();
 			int jdqPort = LoadProperties.getJdqPort();
 			client=new Socket(jdqIp,jdqPort);
 			t_read= new Thread(new ReadJdqSocket(client,JiDianQi.this));
 			t_read.start();
-			System.out.println("连接一检继电器");
+			System.out.println("连接继电器");
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -55,7 +57,7 @@ public class JiDianQi {
 	public void close() {
 		try {
 			client.close();
-			System.out.println("断开一检继电器连接");
+			System.out.println("断开继电器连接");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
