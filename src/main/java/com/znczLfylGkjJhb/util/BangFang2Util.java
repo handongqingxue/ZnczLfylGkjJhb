@@ -12,6 +12,8 @@ import com.znczLfylGkjJhb.yz.YzZlUtil;
  * 南磅房（2号磅房）工具类
  * */
 public class BangFang2Util {
+	
+	private static int loopWeightTime=0;
 
 	/**
 	 * 更新一检车牌识别订单信息
@@ -135,10 +137,14 @@ public class BangFang2Util {
 				System.out.println("后open2==="+jdq.isKgl2Open());
 				System.out.println("waitTime==="+waitTime);
 				if(waitTime>30*1000) {
-					//
+					
+					//////////
 					//若光栅被遮挡超过30s，可能车辆已经上磅，但车头或车尾依然未离开光栅区域。这种情况需先获取下地磅上的车辆重量，判断有无车辆，有的话进入称重环节，没的话则还原到上一步
+					loopWeightTime++;
 					int weight = DiBangTask3190.getTestWeight();
-					if(weight>0) {
+					System.out.println("TestWeight==="+weight);
+					System.out.println("loopWeightTime==="+loopWeightTime);
+					if(weight>0&&loopWeightTime<2) {
 						System.out.println("查找订单状态为一检上磅的订单，将一检上磅状态从上磅中更改为待称重");
 						DingDan dd=new DingDan();
 						dd.setYjbfh(bfh);
@@ -151,7 +157,9 @@ public class BangFang2Util {
 						break;
 					}
 					else {
-					//
+						loopWeightTime=0;
+					///////////
+						
 						System.out.println("称重失败，请重新车牌识别");
 						System.out.println("查找订单状态为一检上磅的订单，将一检上磅状态从待上磅更改为一检排队中");
 						DingDan dd=new DingDan();
@@ -169,9 +177,11 @@ public class BangFang2Util {
 						Thread.sleep(2000);
 			    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
 						break;
-					//
+						
+					/////////////
 					}
-					//
+					////////////
+					
 				}
 				else if(waitTime%(5*1000)==0) {
 					waitTime+=1000;
@@ -228,6 +238,11 @@ public class BangFang2Util {
 				float yjzl=(float)DiBangTask3190.getWeight();
 				
 				if(yjzl>0) {
+					
+					//////
+					loopWeightTime=0;
+					//////
+					
 					APIUtil.playWeight(yjzl);
 					Thread.sleep(2000);
 					APIUtil.playWeight(yjzl);
@@ -280,11 +295,15 @@ public class BangFang2Util {
 					dd.setXyjzt(DingDan.DAI_SHANG_BANG);
 					APIUtil.editDingDanByZt(dd);
 					
-		        	//这段代码到现场有了音柱后再打开
 		    		YinZhuTask.sendMsg(YzZlUtil.get87().replaceAll(" ", ""), 1500);
 					checkYJSBHWGSState();
 				}
 				else if(yjzl==-1) {//称重失败
+					
+					//////
+					loopWeightTime=0;
+					//////
+					
 					System.out.println("查找订单状态为一检上磅的订单，将一检上磅状态从称重中更改为待上磅");
 					dd=new DingDan();
 					dd.setYjbfh(bfh);
@@ -513,10 +532,14 @@ public class BangFang2Util {
 				System.out.println("后open2==="+jdq.isKgl2Open());
 				System.out.println("waitTime==="+waitTime);
 				if(waitTime>30*1000) {
-					//
+					
+					///////////
 					//若光栅被遮挡超过30s，可能车辆已经上磅，但车头或车尾依然未离开光栅区域。这种情况需先获取下地磅上的车辆重量，判断有无车辆，有的话进入称重环节，没的话则还原到上一步
+					loopWeightTime++;
 					int weight = DiBangTask3190.getTestWeight();
-					if(weight>0) {
+					System.out.println("TestWeight==="+weight);
+					System.out.println("loopWeightTime==="+loopWeightTime);
+					if(weight>0&&loopWeightTime<2) {
 						System.out.println("查找订单状态为二检上磅的订单，将二检上磅状态从上磅中更改为待称重");
 						DingDan dd=new DingDan();
 						dd.setEjbfh(bfh);
@@ -529,7 +552,9 @@ public class BangFang2Util {
 						break;
 					}
 					else {
-					//
+						loopWeightTime=0;
+					///////////
+						
 						System.out.println("称重失败，请重新车牌识别");
 						System.out.println("查找订单状态为二检上磅的订单，将二检上磅状态从待上磅更改为二检排队中");
 						DingDan dd=new DingDan();
@@ -547,9 +572,11 @@ public class BangFang2Util {
 						Thread.sleep(2000);
 			    		YinZhuTask.sendMsg(YzZlUtil.get95().replaceAll(" ", ""), 1000);
 						break;
-					//
+						
+					////////////
 					}
-					//
+					////////////
+					
 				}
 				else if(waitTime%(5*1000)==0) {
 					waitTime+=1000;
@@ -635,6 +662,10 @@ public class BangFang2Util {
 				jz=mz-pz;
 				
 				if(ejzl>0) {
+					//////
+					loopWeightTime=0;
+					//////
+					
 					APIUtil.playWeight(ejzl);
 					Thread.sleep(2000);
 					APIUtil.playWeight(ejzl);
@@ -691,6 +722,10 @@ public class BangFang2Util {
 					checkEJSBHWGSState();
 				}
 				else if(ejzl==-1) {//称重失败
+					//////
+					loopWeightTime=0;
+					//////
+					
 					System.out.println("查找订单状态为二检上磅的订单，将二检上磅状态从称重中更改为待上磅");
 					dd=new DingDan();
 					dd.setEjbfh(bfh);
